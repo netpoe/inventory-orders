@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-@import "./src/sass/bootstrap-imports";
+@import "./resources/assets/sass/bootstrap-imports";
 @import "bourbon";
 
 // EBM variables
-@import "./src/sass/ebm-variables";
+@import "./resources/assets/sass/ebm-variables";
 
 // EBM Functions
 @import "./node_modules/ebm/functions/ebm-functions";
@@ -13,13 +13,13 @@
 @import "./node_modules/ebm/helpers/ebm-helpers";
 
 // EBM Fonts setup
-@import "./src/sass/ebm-fonts-setup";
+@import "./resources/assets/sass/ebm-fonts-setup";
 
 // EBM Fonts
-@import "./src/sass/ebm-fonts";
+@import "./resources/assets/sass/ebm-fonts";
 
 // Boostrap custom overrides
-// @import "./src/sass/ebm-bootstrap-overrides";
+// @import "./resources/assets/sass/ebm-bootstrap-overrides";
 
 // EBM Global Imports
 // EBM Control
@@ -107,10 +107,10 @@
 // @import "./node_modules/ebm/modules/ebm-videocover";
 
 // EBM Overrides
-@import "./src/sass/ebm-overrides";
+@import "./resources/assets/sass/ebm-overrides";
 
 // Shared styles for all templates
-@import "./src/sass/ebm-global";
+@import "./resources/assets/sass/ebm-global";
 
 // Third party:
 // @import "./node_modules/ebm/animate/animate-init";

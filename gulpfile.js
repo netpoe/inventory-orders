@@ -24,8 +24,8 @@ let jsTaskList        = [];
 let watchTaskList     = [];
 
 // SRC PATH definitions
-let destFolder = './build';
-let srcFolder = './src';
+let destFolder = './public';
+let srcFolder = './resources/assets';
 
 let cssSrcPath = `${srcFolder}/sass`;
 let cssDest    = `${destFolder}/css`;
