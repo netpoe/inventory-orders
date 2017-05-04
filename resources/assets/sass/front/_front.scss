@@ -1,0 +1,19 @@
+.container-overlap {
+  margin-top: -$top-menu-height-control;
+}
+
+.products-showcase {
+  border-bottom: 1px solid $gray-lightest;
+  background-color: white;
+  min-height: 350px;
+}
+
+.products-wrapper {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.products-grid-filters-header,
+.products-grid-display-control {
+  min-height: $products-grid-header-height-control;
+}

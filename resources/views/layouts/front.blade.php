@@ -11,16 +11,12 @@
     @yield('head-link')
   </head>
   <body>
-    @include('includes.dashboard.search-wrapper')
-    <div class="site-wrapper" id="site-wrapper"> <!-- Body -->
-      @include('includes.dashboard.top-menu')
-      @include('includes.dashboard.header')
-      @include('includes.dashboard.sub-header')
+    <div class="site-wrapper" id="site-wrapper">
+      @include('includes.front.top-menu')
+      @include('includes.front.header')
       <main class="site-content" role="main">
         @yield('content')
       </main>
     </div>
-    <!-- Page scripts -->
-    <!-- <script src="js/@@jsPath.js"></script> -->
   </body>
 </html>

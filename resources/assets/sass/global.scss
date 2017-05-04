@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import "./resources/assets/sass/bootstrap-imports";
+$output-bourbon-deprecation-warnings: false !default;
 @import "bourbon";
 
 // EBM variables

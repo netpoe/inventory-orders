@@ -27,15 +27,12 @@ $output-bourbon-deprecation-warnings: false !default;
 
 @import "./node_modules/ebm/modules/ebm-header";
 @import "./node_modules/bootstrap/scss/forms";
-@import "./node_modules/bootstrap/scss/breadcrumb";
-@import "./node_modules/bootstrap/scss/card";
 
-// Boostrap custom overrides
-@import "./resources/assets/sass/dashboard/ebm-bootstrap-overrides";
-
-@import "./resources/assets/sass/dashboard/top-menu";
-@import "./resources/assets/sass/dashboard/search-wrapper";
-@import "./resources/assets/sass/dashboard/user-resources-nav";
+@import "./resources/assets/sass/front/top-menu";
+@import "./resources/assets/sass/front/header";
 
 @import "./node_modules/ebm/control/ebm-color-text-control";
 @import "./node_modules/ebm/control/ebm-spacing-control";
+
+
+$products-grid-header-height-control: $top-menu-height-control;

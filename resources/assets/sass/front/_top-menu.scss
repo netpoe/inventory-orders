@@ -1,0 +1,16 @@
+$top-menu-height-control: 56px;
+
+.top-menu {
+  @include flex-row-space-between;
+  border-bottom: 1px solid darken($brand-info, 7%);
+  background-color: $brand-info;
+  .top-menu-left,
+  .top-menu-center,
+  .top-menu-right {
+    @include flex-column-center;
+    min-height: $top-menu-height-control;
+  }
+  .top-menu-left {}
+  .top-menu-center {}
+  .top-menu-right {}
+}

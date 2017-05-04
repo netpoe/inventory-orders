@@ -1,0 +1,63 @@
+$product-item-height-control: 280px;
+$product-item-width-control: 33.33%;
+.products-grid {
+  @include flex-wrap(wrap);
+  @include flex-row;
+  .product {
+    @include flex-basis($product-item-width-control);
+    @include flex-column-end;
+    min-height: $product-item-height-control;
+    border: 1px solid $gray-lightest;
+    position: relative;
+    &:hover {
+      .product-overlay {
+        opacity: 1;
+      }
+    }
+  }
+  .product-img {
+    @include position(absolute, 0 0 0 0);
+    z-index: 9;
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+  .product-name-price {
+    @include flex-column-center;
+    min-height: $products-grid-header-height-control;
+    padding: get-spacer(2, x);
+  }
+  .name,
+  .price {
+    display: block;
+  }
+  .name {}
+  .price {}
+  .product-overlay {
+    @include position(absolute, 0 0 0 0);
+    @include flex-column-space-between;
+    background-color: rgba($brand-info, .9);
+    transition: opacity .3s ease-in-out;
+    padding: get-spacer(3, x);
+    opacity: 0;
+    z-index: 10;
+    .top {
+      @include flex-row-space-between;
+      padding: get-spacer(2, x);
+    }
+    .actions {
+      @include flex-row;
+      padding: get-spacer(2, x);
+      .main {
+        width: 60%;
+      }
+      .secondary {
+        width: 40%;
+      }
+    }
+    .product-name-price {
+      color: white;
+    }
+  }
+}

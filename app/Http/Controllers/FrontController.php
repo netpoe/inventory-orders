@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
-class OrdersController extends Controller
+class FrontController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,6 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -24,7 +23,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -41,10 +40,10 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Product $product)
     {
         //
     }
@@ -52,10 +51,10 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Product $product)
     {
         //
     }
@@ -64,10 +63,10 @@ class OrdersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -75,10 +74,10 @@ class OrdersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(Product $product)
     {
         //
     }
