@@ -5,8 +5,9 @@
 @endsection
 
 @section('dashboard-sub-menu-items')
-<a href="#">Mis productos</a>
-<a href="#">Crear</a>
+<a href="#">Carrito</a>
+<a href="#">Envío</a>
+<a href="#">Pago</a>
 @endsection
 
 @section('content')

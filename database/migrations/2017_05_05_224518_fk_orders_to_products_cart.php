@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FkOrdersConstraints extends Migration
+class FkOrdersToProductsCart extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class FkOrdersConstraints extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('status_id')->references('id')->on('lu_order_status');
+            $table->foreign('products_cart_session')->references('session')->on('products_cart');
         });
     }
 }

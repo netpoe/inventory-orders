@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelProductsCartTable extends Migration
+class CreateLuProductsCartStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateRelProductsCartTable extends Migration
      */
     public function up()
     {
-        Schema::create('rel_products_cart', function (Blueprint $table) {
+        Schema::create('lu_products_cart_status', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->timestamps();
+            $table->string('status', 20);
         });
     }
 }
