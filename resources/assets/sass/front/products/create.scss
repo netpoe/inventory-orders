@@ -20,3 +20,14 @@
     }
   }
 }
+
+.front-dashboard-sub-menu {
+  a {
+    padding: get-spacer(1, y) get-spacer(3, x);
+    font-size: $font-size-sm;
+    display: inline-block;
+    &:hover {
+      background-color: $gray-lighter;
+    }
+  }
+}

@@ -4,15 +4,17 @@
 <link href="/css/front/products/create.css" rel="stylesheet">
 @endsection
 
+@section('dashboard-sub-menu-items')
+<a href="#">Mis productos</a>
+<a href="#">Crear</a>
+@endsection
+
 @section('content')
 <div class="container-overlap">
   <div class="container">
-    <header class="front-dashboard-menu">
-      <a href="#" class="menu-item"><span>Productos</span></a>
-      <a href="#" class="menu-item"><span>Órdenes</span></a>
-      <a href="#" class="menu-item"><span>Facturas</span></a>
-      <a href="#" class="menu-item"><span>Perfil</span></a>
-    </header>
+    @include('includes.front.dashboard-menu')
+    @include('includes.front.dashboard-sub-menu')
+
     <section class="products-wrapper">
       <div class="row">
         <div class="col-sm-8 p-3">

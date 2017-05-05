@@ -16,8 +16,10 @@ Auth::routes();
 Route::get('/', 'ProductsController@index')->name('products:index');
 Route::get('/products/create', 'ProductsController@create')->name('products:create');
 
+Route::get('/brands/create', 'BrandsController@create')->name('brands:create');
+
 Route::get('/front/products', 'FrontController@index')->name('front:index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/orders', 'OrdersController@index')->name('orders:index');
+Route::get('/dashboard/orders', 'OrdersController@index')->name('orders:index');

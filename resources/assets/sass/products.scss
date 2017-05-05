@@ -22,6 +22,9 @@ $output-bourbon-deprecation-warnings: false !default;
 // EBM Overrides
 @import "./resources/assets/sass/ebm-overrides";
 
+@import "./node_modules/bootstrap/scss/breadcrumb";
+@import "./resources/assets/sass/dashboard/ebm-bootstrap-overrides";
+
 // Shared styles for all templates
 @import "./resources/assets/sass/ebm-global";
 

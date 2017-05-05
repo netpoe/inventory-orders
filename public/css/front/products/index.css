@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -2872,6 +2873,84 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 */
 /* PROJECT ESPECIFIC FONTS */
 /* PROJECT ESPECIFIC FONTS */
+.breadcrumb {
+  padding: 3px 2px;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: transparent;
+  border-radius: 0.25rem;
+}
+
+.breadcrumb::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.breadcrumb-item {
+  float: left;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: #818A91;
+  content: "·";
+}
+
+.breadcrumb-item + .breadcrumb-item:hover::before {
+  text-decoration: underline;
+}
+
+.breadcrumb-item + .breadcrumb-item:hover::before {
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #818A91;
+}
+
+/*
+  Bootstrap overrides
+*/
+.breadcrumb {
+  margin-bottom: 0;
+  font-size: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.card {
+  margin-bottom: 1rem;
+}
+
+.card .card-header {
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.card .card-header .title, .card .card-header .action {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 35px;
+}
+
+.card-block.card-block-scroll {
+  overflow: scroll;
+  height: 222px;
+}
+
 /*
   EBM Global styles
 */

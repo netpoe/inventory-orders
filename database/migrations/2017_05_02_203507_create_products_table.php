@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('cost', 13, 2)->unsigned()->nullable();
             $table->decimal('price', 13, 2)->unsigned()->nullable();
             $table->decimal('discount', 2, 2)->unsigned()->nullable();
+            $table->integer('brand_id')->unsigned();
             $table->timestamps();
         });
     }
