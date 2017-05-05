@@ -3,11 +3,20 @@
 @import "./resources/assets/sass/front/products-grid";
 
 .front-dashboard-menu {
-  @include flex-row;
+  @include flex-row-space-between;
+  border-bottom: 1px solid $gray-lightest;
   .menu-item {
     @include flex-column-center;
+    border-right: 1px solid $gray-lightest;
+    background-color: white;
     min-height: $top-menu-height-control;
     text-align: center;
-    display: block;
+    flex-grow: 1;
+    &:last-child {
+      border-right: none;
+    }
+    &:hover {
+      background-color: $gray-lightest;
+    }
   }
 }
