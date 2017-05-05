@@ -5,6 +5,7 @@
 @endsection
 
 @section('dashboard-sub-menu-items')
+  <a href="#">Mis marcas</a>
   <a href="#">Crear</a>
 @endsection
 
@@ -14,24 +15,28 @@
     @include('includes.front.dashboard-menu')
     @include('includes.front.dashboard-sub-menu')
 
-    <section class="products-wrapper">
-      <div class="row">
-        <div class="col-sm-8 p-3">
-          <form action="" method="POST">
+    <form action="{{ route('brands:store') }}" method="POST">
+      <section class="products-wrapper">
+        <div class="row">
+          <div class="col-sm-8 p-3">
+              {{ csrf_field() }}
+              <fieldset class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name">Nombre de la marca</label>
+                <input name="name" value="{{ old('name') }}" type="text" class="form-control form-control-lg" autofocus required>
+              </fieldset>
+              @if ($errors->has('name'))
+              <span class="help-block">{{ $errors->first('name') }}</span>
+              @endif
+          </div>
+          <div class="col-sm-4 p-3">
             <fieldset class="form-group">
-              <label for="brand">Nombre de la marca</label>
-              <input name="brand" type="text" class="form-control form-control-lg" autofocus required>
+              <label>&nbsp;</label>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Publicar</button>
             </fieldset>
-          </form>
+          </div>
         </div>
-        <div class="col-sm-4 p-3">
-          <fieldset class="form-group">
-            <label>&nbsp;</label>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Publicar</button>
-          </fieldset>
-        </div>
-      </div>
-    </section>
+      </section>
+    </form>
   </div>
 </div>
 @endsection

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Brand;
+use App\ModelAdapters\BrandAdapter as Brand;
 use Illuminate\Http\Request;
+use Auth;
 
 class BrandsController extends Controller
 {
@@ -14,7 +15,9 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::where('user_id', Auth::user()->id)->get();
+
+        return view('front/brands/index', compact('brands'));
     }
 
     /**
@@ -35,7 +38,13 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = new Brand;
+
+        $brand->name = $request->input('name');
+        $brand->user_id = Auth::user()->id;
+        $brand->save();
+
+        return redirect('brands:index');
     }
 
     /**
