@@ -1,0 +1,25 @@
+$front-dashboard-menu-color: $brand-info;
+.front-dashboard-menu {
+  @include flex-row-space-between;
+  border-bottom: 1px solid $gray-lightest;
+  .menu-item {
+    @include flex-column-center;
+    border-right: 1px solid $gray-lightest;
+    background-color: white;
+    min-height: $top-menu-height-control;
+    text-align: center;
+    flex-grow: 1;
+    &:last-child {
+      border-right: none;
+    }
+    &:hover,
+    &.active {
+      background-color: darken($front-dashboard-menu-color, 7%);
+      border-right: 1px solid $front-dashboard-menu-color;
+      color: white;
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\ModelAdapters\ProductAdapter as Product;
+use App\ModelAdapters\BrandAdapter as Brand;
 use Illuminate\Http\Request;
+use Auth;
+use App\Http\Requests\StoreProduct;
 
 class ProductsController extends Controller
 {
@@ -24,7 +27,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('front/products/create');
+        $brands = Brand::where('user_id', Auth::user()->id)->get();
+
+        return view('front/products/create', compact('brands'));
     }
 
     /**
@@ -33,9 +38,27 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        //
+        $product = new Product;
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->cost = $request->input('cost');
+        $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
+
+        $product->brand_id = $request->input('brand_id');
+
+        $userId = Auth::user()->id;
+        $product->user_id = $userId;
+
+        $product->save();
+
+        $product->sku = $product->makeSku();
+        $product->save();
+
+        return redirect('front:products:index');
     }
 
     /**

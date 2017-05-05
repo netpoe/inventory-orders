@@ -33,3 +33,17 @@
     height: 222px;
   }
 }
+
+.has-error {
+  @include form-control-validation($brand-danger);
+
+  label,
+  .help-block {
+    color: $brand-danger;
+  }
+
+
+  .form-control-danger {
+    background-image: $form-icon-danger;
+  }
+}

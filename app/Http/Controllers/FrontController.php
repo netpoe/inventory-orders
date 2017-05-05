@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\ModelAdapters\ProductAdapter as Product;
 use Illuminate\Http\Request;
+use Auth;
 
 class FrontController extends Controller
 {
@@ -14,6 +15,9 @@ class FrontController extends Controller
      */
     public function index()
     {
+        $products = Product::where('user_id', Auth::user()->id)->get();
+
+        return view('front/products/index', compact('products'));
     }
 
     /**

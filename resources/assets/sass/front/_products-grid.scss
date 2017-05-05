@@ -9,6 +9,7 @@ $product-item-width-control: 33.33%;
     min-height: $product-item-height-control;
     border: 1px solid $gray-lightest;
     position: relative;
+    overflow: hidden;
     &:hover {
       .product-overlay {
         opacity: 1;
@@ -17,7 +18,7 @@ $product-item-width-control: 33.33%;
   }
   .product-img {
     @include position(absolute, 0 0 0 0);
-    z-index: 9;
+    z-index: 1;
     img {
       height: auto;
       width: 100%;
@@ -27,6 +28,8 @@ $product-item-width-control: 33.33%;
     @include flex-column-center;
     min-height: $products-grid-header-height-control;
     padding: get-spacer(2, x);
+    position: relative;
+    z-index: 2;
   }
   .name,
   .price {
@@ -41,7 +44,7 @@ $product-item-width-control: 33.33%;
     transition: opacity .3s ease-in-out;
     padding: get-spacer(3, x);
     opacity: 0;
-    z-index: 10;
+    z-index: 3;
     .top {
       @include flex-row-space-between;
       padding: get-spacer(2, x);

@@ -3679,6 +3679,37 @@ select.form-control-lg:not([size]):not([multiple]) {
   height: 222px;
 }
 
+.has-error .form-control-feedback,
+.has-error .form-control-label,
+.has-error .col-form-label,
+.has-error .form-check-label,
+.has-error .custom-control {
+  color: #d9534f;
+}
+
+.has-error .form-control {
+  border-color: #d9534f;
+}
+
+.has-error .form-control:focus {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eba5a3;
+}
+
+.has-error .input-group-addon {
+  color: #d9534f;
+  border-color: #d9534f;
+  background-color: #fdf7f7;
+}
+
+.has-error label,
+.has-error .help-block {
+  color: #d9534f;
+}
+
+.has-error .form-control-danger {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d9534f' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23d9534f' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E");
+}
+
 .top-menu {
   -ms-flex-pack: justify;
   justify-content: space-between;

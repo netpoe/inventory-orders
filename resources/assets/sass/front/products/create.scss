@@ -1,33 +1,5 @@
 @import "./resources/assets/sass/products.scss";
 @import "./resources/assets/sass/front/front";
 @import "./resources/assets/sass/front/products-grid";
-
-.front-dashboard-menu {
-  @include flex-row-space-between;
-  border-bottom: 1px solid $gray-lightest;
-  .menu-item {
-    @include flex-column-center;
-    border-right: 1px solid $gray-lightest;
-    background-color: white;
-    min-height: $top-menu-height-control;
-    text-align: center;
-    flex-grow: 1;
-    &:last-child {
-      border-right: none;
-    }
-    &:hover {
-      background-color: $gray-lightest;
-    }
-  }
-}
-
-.front-dashboard-sub-menu {
-  a {
-    padding: get-spacer(1, y) get-spacer(3, x);
-    font-size: $font-size-sm;
-    display: inline-block;
-    &:hover {
-      background-color: $gray-lighter;
-    }
-  }
-}
+@import "./resources/assets/sass/front/dashboard-menu";
+@import "./resources/assets/sass/front/dashboard-sub-menu";

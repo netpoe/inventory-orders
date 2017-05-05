@@ -15,7 +15,7 @@
     @include('includes.front.dashboard-menu')
     @include('includes.front.dashboard-sub-menu')
 
-    <form action="{{ route('brands:store') }}" method="POST">
+    <form action="{{ route('front:brands:store') }}" method="POST">
       <section class="products-wrapper">
         <div class="row">
           <div class="col-sm-8 p-3">

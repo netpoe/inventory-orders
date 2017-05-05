@@ -15,50 +15,77 @@
     @include('includes.front.dashboard-menu')
     @include('includes.front.dashboard-sub-menu')
 
-    <section class="products-wrapper">
-      <div class="row">
-        <div class="col-sm-8 p-3">
-          <form action="" method="POST">
-            <fieldset class="form-group">
-              <label for="name">Nombre del producto</label>
-              <input name="name" type="text" class="form-control form-control-lg" autofocus required>
-            </fieldset>
-            <div class="row">
-              <fieldset class="col-sm-4 form-group">
-                <label for="cost">Costo</label>
-                <input name="cost" type="number" class="form-control form-control-lg" required>
+    <form action="{{ route('front:products:store') }}" method="POST">
+      {{ csrf_field() }}
+      <section class="products-wrapper">
+        <div class="row">
+          <div class="col-sm-8 p-3">
+              <fieldset class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                <label for="name">Nombre del producto</label>
+                <input name="name" type="text" value="{{ old('name') }}" class="form-control form-control-lg" autofocus required>
+                @if ($errors->has('name'))
+                  <span class="help-block">{{ $errors->first('name') }}</span>
+                @endif
               </fieldset>
-              <fieldset class="col-sm-4 form-group">
-                <label for="price">Precio</label>
-                <input name="price" type="number" class="form-control form-control-lg" required>
+              <fieldset class="form-group {{ $errors->has('brand_id') ? 'has-error' : '' }}">
+                <label for="brand_id">Marca asociada al producto</label>
+                <select name="brand_id" value="{{ old('brand_id') }}" required class="form-control form-control-lg">
+                  @foreach ($brands as $brand)
+                    <option value="{{ $brand->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $brand->name }}</option>
+                  @endforeach
+                </select>
+                @if ($errors->has('brand_id'))
+                  <span class="help-block">{{ $errors->first('brand_id') }}</span>
+                @endif
               </fieldset>
-              <fieldset class="col-sm-4 form-group">
-                <label for="discount">Descuento</label>
-                <input name="discount" type="number" class="form-control form-control-lg" required>
+              <div class="row">
+                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                  <label for="cost">Costo</label>
+                  <input name="cost" value="{{ old('cost') }}" type="text" class="form-control form-control-lg" required>
+                </fieldset>
+                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                  <label for="price">Precio</label>
+                  <input name="price" value="{{ old('price') }}" type="text" class="form-control form-control-lg" required>
+                </fieldset>
+                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                  <label for="discount">Descuento</label>
+                  <input name="discount" value="{{ old('discount') }}" type="text" class="form-control form-control-lg" required>
+                </fieldset>
+              </div>
+              @if ($errors->has('cost'))
+                <span class="help-block">{{ $errors->first('cost') }}</span>
+              @endif
+              @if ($errors->has('price'))
+                <span class="help-block">{{ $errors->first('price') }}</span>
+              @endif
+              @if ($errors->has('discount'))
+                <span class="help-block">{{ $errors->first('discount') }}</span>
+              @endif
+              <fieldset class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                <label for="description">Descripción</label>
+                <textarea name="description" value="{{ old('description') }}" type="text" class="form-control form-control-lg"></textarea>
+                @if ($errors->has('description'))
+                  <span class="help-block">{{ $errors->first('description') }}</span>
+                @endif
               </fieldset>
-            </div>
+              <!-- <fieldset class="form-group">
+                <label for="featured_image">Imagen principal</label>
+                <input name="featured_image" type="text" class="form-control form-control-lg" required>
+              </fieldset>
+              <fieldset class="form-group">
+                <label for="images">Galería</label>
+                <input name="images" type="text" class="form-control form-control-lg" required>
+              </fieldset> -->
+          </div>
+          <div class="col-sm-4 p-3">
             <fieldset class="form-group">
-              <label for="description">Descripción</label>
-              <textarea name="description" type="text" class="form-control form-control-lg"></textarea>
+              <label>&nbsp;</label>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Publicar</button>
             </fieldset>
-            <!-- <fieldset class="form-group">
-              <label for="featured_image">Imagen principal</label>
-              <input name="featured_image" type="text" class="form-control form-control-lg" required>
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="images">Galería</label>
-              <input name="images" type="text" class="form-control form-control-lg" required>
-            </fieldset> -->
-          </form>
+          </div>
         </div>
-        <div class="col-sm-4 p-3">
-          <fieldset class="form-group">
-            <label>&nbsp;</label>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Publicar</button>
-          </fieldset>
-        </div>
-      </div>
-    </section>
+      </section>
+    </form>
   </div>
 </div>
 @endsection
