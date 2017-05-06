@@ -8,15 +8,22 @@
   .actions {
     @include flex-row-space-between;
     border-top: 1px solid $gray-lightest;
-    > div {
+    > div, a {
       @include flex-column-center;
       text-align: center;
-      min-height: 70px;
+      min-height: 56px;
       flex-grow: 1;
       &:hover {
         background-color: $brand-info;
         cursor: pointer;
         color: white;
+      }
+    }
+    > .form-group {
+      margin-bottom: 0;
+      width: 100%;
+      button {
+        min-height: 56px;
       }
     }
   }

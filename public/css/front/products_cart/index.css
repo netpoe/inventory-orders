@@ -4319,7 +4319,7 @@ a.text-danger:not(.btn):hover {
   border-top: 1px solid #F7F7F9;
 }
 
-.products-cart-wrapper .actions > div {
+.products-cart-wrapper .actions > div, .products-cart-wrapper .actions a {
   -ms-flex-pack: center;
   justify-content: center;
   -ms-flex-direction: column;
@@ -4327,13 +4327,22 @@ a.text-danger:not(.btn):hover {
   display: -ms-flexbox;
   display: flex;
   text-align: center;
-  min-height: 70px;
+  min-height: 56px;
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
-.products-cart-wrapper .actions > div:hover {
+.products-cart-wrapper .actions > div:hover, .products-cart-wrapper .actions a:hover {
   background-color: #0275d8;
   cursor: pointer;
   color: white;
+}
+
+.products-cart-wrapper .actions > .form-group {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.products-cart-wrapper .actions > .form-group button {
+  min-height: 56px;
 }

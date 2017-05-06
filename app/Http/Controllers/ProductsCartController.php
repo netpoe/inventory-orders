@@ -8,6 +8,7 @@ use App\ModelAdapters\ProductAdapter as Product;
 use Illuminate\Http\Request;
 use Auth;
 use App\Utils\CookieTool;
+use App\Http\Requests\StoreProductsCartAmount;
 
 class ProductsCartController extends Controller
 {
@@ -46,9 +47,10 @@ class ProductsCartController extends Controller
     {
         $cookie = $request->cookie('laravel_visitor_session');
 
+        // TODO if cookie does not exist, create it and redirect
+
         $cart = new ProductsCart;
 
-        // TODO check if the product already exists for the session
         $productExistsInCart = !$cart
             ->where('session', $cookie)
             ->where('product_id', $product->id)
@@ -63,6 +65,27 @@ class ProductsCartController extends Controller
         $cart->status_id = LuProductsCartStatus::IN_SESSION;
 
         $cart->save();
+
+        return redirect()->route('cart:index');
+    }
+
+    /*
+     * setProductsAmount
+     *
+     * Method will update the products_cart.product_amount field according to the user selection
+     * Restrictions include if the input product_amount is greater than product.stock value, the update should not do
+     *
+     * @param Request
+     *
+     * @return redirect to cart:shipping
+     * */
+    public function setProductsAmount(StoreProductsCartAmount $request)
+    {
+        $cookie = $request->cookie('laravel_visitor_session');
+        // TODO if cookie does not exist, create it and redirect
+
+        $cart = new ProductsCart;
+        $cart->setProductsAmount($cookie, $request->input('product.id'));
 
         return redirect()->route('cart:index');
     }

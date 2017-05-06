@@ -22,8 +22,9 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::get('/cart', 'ProductsCartController@index')->name('cart:index');
+Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
+Route::post('/cart/set-products-amount', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
 });
 
 Route::group(['middleware' => 'auth'], function(){

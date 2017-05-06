@@ -28,8 +28,9 @@ class StoreProduct extends FormRequest
             'description' => 'required|string|max:3500',
             'cost' => 'required|numeric',
             'price' => 'required|numeric',
-            'discount' => 'numeric',
+            'discount' => 'nullable|numeric',
             'brand_id' => 'required|integer',
+            'stock' => 'integer',
         ];
     }
 }
