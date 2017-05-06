@@ -155,7 +155,7 @@ gulp.task('fileinclude', function() {
 
   gulp.watch(`${htmlSrcPath}/*.html`, ['fileinclude']);
 });
-watchTaskList.push('fileinclude');
+// watchTaskList.push('fileinclude');
 
 gulp.task('browser-sync', function() {
   browserSync.init({

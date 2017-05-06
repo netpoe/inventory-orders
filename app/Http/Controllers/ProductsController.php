@@ -17,7 +17,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('front/products/index');
+        $products = Product::orderBy('name')->get();
+
+        return view('home', compact('products'));
     }
 
     /**
@@ -58,7 +60,7 @@ class ProductsController extends Controller
         $product->sku = $product->makeSku();
         $product->save();
 
-        return redirect('front:products:index');
+        return redirect()->route('front:products:index');
     }
 
     /**

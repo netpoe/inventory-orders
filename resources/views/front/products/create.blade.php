@@ -49,7 +49,7 @@
                 </fieldset>
                 <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="discount">Descuento</label>
-                  <input name="discount" value="{{ old('discount') }}" type="text" class="form-control form-control-lg" required>
+                  <input name="discount" value="{{ old('discount') }}" type="text" class="form-control form-control-lg">
                 </fieldset>
               </div>
               @if ($errors->has('cost'))

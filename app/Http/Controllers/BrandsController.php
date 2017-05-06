@@ -44,7 +44,7 @@ class BrandsController extends Controller
         $brand->user_id = Auth::user()->id;
         $brand->save();
 
-        return redirect('front:brands:index');
+        return redirect()->route('front:brands:index');
     }
 
     /**

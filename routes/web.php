@@ -19,6 +19,7 @@ Route::post('/front/products/store', 'ProductsController@store')->name('front:pr
 Route::get('/front/products', 'FrontController@index')->name('front:products:index');
 
 Route::get('/cart', 'ProductsCartController@index')->name('cart:index');
+Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
 
 Route::get('/front/brands', 'BrandsController@index')->name('front:brands:index');
 Route::get('/front/brands/create', ['middleware' => 'auth', 'uses' => 'BrandsController@create'])->name('front:brands:create');

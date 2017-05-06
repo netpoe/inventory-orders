@@ -18,31 +18,33 @@
         <div class="col-sm-8">
           <header class="products-grid-display-control"></header>
           <div class="row products-grid">
-            <article class="product">
-              <div class="product-img"><img src="/img/products/product.png" alt=""></div>
-              <a href="#" class="product-name-price">
-                <span class="name">Producto</span>
-                <span class="price">$0.00</span>
-              </a>
-              <div class="product-overlay">
-                <div class="top">
-                  <span class="category">Categoría</span>
-                  <span class="discount">-25%</span>
-                </div>
-                <div class="actions">
-                  <div class="main">
-                    <a href="#" class="btn btn-secondary">+ Carrito</a>
-                  </div>
-                  <div class="secondary">
-                    <a href="#" class="btn btn-sm btn-outline-secondary">Ver</a>
-                  </div>
-                </div>
+            @foreach ($products as $product)
+              <article class="product">
                 <a href="#" class="product-name-price">
-                  <span class="name">Producto</span>
-                  <span class="price">$0.00</span>
+                  <span class="name">{{ $product->name }}</span>
+                  <span class="price">{{ $product->price }}</span>
                 </a>
-              </div>
-            </article>
+                <div class="product-img"><img src="/img/products/product.png" alt=""></div>
+                <div class="product-overlay">
+                  <div class="top">
+                    <span class="category">Categoría</span>
+                    <span class="discount">{{ $product->discount }}</span>
+                  </div>
+                  <div class="actions">
+                    <div class="main">
+                      <a href="{{ route('cart:store', ['product_id' => $product->id]) }}" class="btn btn-secondary">+ Carrito</a>
+                    </div>
+                    <div class="secondary">
+                      <a href="#" class="btn btn-sm btn-outline-secondary">Ver</a>
+                    </div>
+                  </div>
+                  <a href="#" class="product-name-price">
+                    <span class="name">{{ $product->name }}</span>
+                    <span class="price">{{ $product->price }}</span>
+                  </a>
+                </div>
+              </article>
+            @endforeach
           </div>
         </div>
       </div>

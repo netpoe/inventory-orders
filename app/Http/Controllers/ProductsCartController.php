@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductsCart;
+use App\ModelAdapters\ProductsCartAdapter as ProductsCart;
+use App\ModelAdapters\LuProductsCartStatusAdapter as LuProductsCartStatus;
+use App\ModelAdapters\ProductAdapter as Product;
 use Illuminate\Http\Request;
+use Auth;
 
 class ProductsCartController extends Controller
 {
@@ -14,7 +17,12 @@ class ProductsCartController extends Controller
      */
     public function index(Request $request)
     {
-        return view('products_cart/index');
+        $cookie = $request->cookie('laravel_session');
+
+        $productsInCart = ProductsCart::where('session', $cookie)->get()->pluck('product_id');
+        $products = Product::whereIn('id', $productsInCart)->get();
+
+        return view('products_cart/index', compact('products'));
     }
 
     /**
@@ -33,9 +41,25 @@ class ProductsCartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        $cookie = $request->cookie('laravel_session');
+
+        $cart = new ProductsCart;
+
+        // TODO check if the product already exists for the session
+        if (!$cart->where('session', $cookie)->get()->isEmpty()) {
+            return redirect()->route('cart:index');
+        }
+
+        $cart->product_id = $product->id;
+        $cart->session = $cookie;
+        $cart->user_id = Auth::user()->id;
+        $cart->status_id = LuProductsCartStatus::IN_SESSION;
+
+        $cart->save();
+
+        return redirect()->route('cart:index');
     }
 
     /**

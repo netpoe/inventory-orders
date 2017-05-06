@@ -1,0 +1,57 @@
+$product-item-height-control: 140px;
+$product-item-width-control: 100%;
+
+.products-cart-list {
+  .product {
+    @include flex-basis($product-item-width-control);
+    @include flex-row;
+    min-height: $product-item-height-control;
+    border: 1px solid $gray-lightest;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .product-img {
+    width: $product-item-height-control;
+    position: initial;
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+  .product-name-price {
+    @include flex-row-space-between;
+    > div {
+      @include flex-column;
+      min-height: $product-item-height-control;
+    }
+    width: 30%;
+  }
+  .name,
+  .price {}
+  .name {}
+  .price {}
+  .product-overlay {
+    @include flex-column-space-between;
+    background-color: transparent;
+    position: initial;
+    opacity: 1;
+    width: 70%;
+    .top {
+      @include flex-row-space-between;
+    }
+    .actions {
+      @include flex-row;
+      padding: get-spacer(2, x);
+      .main {
+        width: 60%;
+      }
+      .secondary {
+        width: 40%;
+      }
+    }
+    .product-name-price {
+      color: white;
+    }
+  }
+}
