@@ -5,6 +5,8 @@ $product-price-width-control: 10%;
 $product-amount-width-control: 30%;
 $product-amount-total-width-control: 10%;
 $product-removal-width-control: 5%;
+$totals-concept-width-control: 65%;
+$totals-amount-width-control: 35%;
 
 .products-cart-list {
   .product {
@@ -36,8 +38,14 @@ $product-removal-width-control: 5%;
   .product-price {
     width: $product-price-width-control;
   }
-  .product-amount {
+  .product-amount,
+  .product-amount-value {
     width: $product-amount-width-control;
+  }
+  .product-price,
+  .product-amount-value,
+  .amount-total {
+    text-align: right;
   }
   .amount-total {
     width: $product-amount-total-width-control;
@@ -58,19 +66,18 @@ $product-removal-width-control: 5%;
 }
 
 .products-cart-list {
-  .totals {
-    @include flex-basis($product-item-width-control);
+  .summary {
     @include flex-row-end;
-    > div {
-      padding: get-spacer(3, x);
-      &:first-child {
-        width: $product-item-height-control;
-      }
-      &:nth-child(2) {
-        width: $product-name-width-control;
-      }
-      &:nth-child(3) {
-        width: $product-price-width-control;
+    > div:first-child {
+      width: 60%;
+    }
+  }
+  .totals {
+    width: 40%;
+    .totals-row {
+      @include flex-row;
+      > div {
+        padding: get-spacer(3, x);
       }
     }
     .concept,
@@ -78,11 +85,12 @@ $product-removal-width-control: 5%;
       border: 1px solid $gray-lightest;
     }
     .concept {
-      width: $product-amount-width-control;
+      width: $totals-concept-width-control;
       text-align: right;
     }
     .amount {
-      width: $product-amount-total-width-control + $product-removal-width-control;
+      width: $totals-amount-width-control;
+      text-align: right;
     }
   }
 }

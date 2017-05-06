@@ -21,8 +21,8 @@ class ProductsCartController extends Controller
     {
         $cookie = $request->cookie('laravel_visitor_session');
 
-        $productsInCart = ProductsCart::where('session', $cookie)->get()->pluck('product_id');
-        $products = Product::whereIn('id', $productsInCart)->get();
+        $productsCart = new ProductsCart;
+        $products = $productsCart->getProductsInSession($cookie);
 
         return view('front/products_cart/index', compact('products'));
     }

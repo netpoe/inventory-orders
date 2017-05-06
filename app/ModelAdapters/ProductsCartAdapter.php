@@ -3,6 +3,7 @@
 namespace App\ModelAdapters;
 
 use App\ProductsCart;
+use App\ModelAdapters\ProductAdapter as Product;
 
 class ProductsCartAdapter extends ProductsCart
 {
@@ -16,5 +17,13 @@ class ProductsCartAdapter extends ProductsCart
         }
 
         return $this;
+    }
+
+    public function getProductsInSession(String $session)
+    {
+        $productsInCart = $this->where('session', $session)->get()->pluck('product_id');
+        $products = Product::whereIn('id', $productsInCart)->get();
+
+        return $products;
     }
 }

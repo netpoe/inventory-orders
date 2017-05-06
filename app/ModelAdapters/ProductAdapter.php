@@ -16,4 +16,9 @@ class ProductAdapter extends Product
 
         return $sku;
     }
+
+    public function amountOnCart()
+    {
+        return $this->cart->product_amount;
+    }
 }

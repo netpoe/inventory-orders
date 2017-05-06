@@ -37,5 +37,6 @@ $output-bourbon-deprecation-warnings: false !default;
 @import "./node_modules/ebm/control/ebm-color-text-control";
 @import "./node_modules/ebm/control/ebm-spacing-control";
 
+@import "./node_modules/ebm/elements/ebm-icons";
 
 $products-grid-header-height-control: $top-menu-height-control;

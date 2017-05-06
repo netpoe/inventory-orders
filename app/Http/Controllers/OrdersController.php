@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
 use Illuminate\Http\Request;
+use App\ModelAdapters\ProductsCartAdapter as ProductsCart;
+use App\ModelAdapters\ProductAdapter as Product;
+use App\ModelAdapters\OrderAdapter as Order;
+use App\ModelAdapters\LuOrderStatusAdapter as LuOrderStatus;
+use Auth;
 
 class OrdersController extends Controller
 {
@@ -15,6 +19,16 @@ class OrdersController extends Controller
     public function index()
     {
         return view('dashboard/orders/index');
+    }
+
+    public function confirmation(Request $request)
+    {
+        $cookie = $request->cookie('laravel_visitor_session');
+
+        $productsCart = new ProductsCart;
+        $products = $productsCart->getProductsInSession($cookie);
+
+        return view('front/orders/confirmation', compact('products'));
     }
 
     /**
@@ -35,7 +49,18 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $session = $request->cookie('laravel_visitor_session');
+
+        $order = new Order;
+        $order->user_id = Auth::id();
+        $order->products_cart_session = $session;
+        $order->status_id = LuOrderStatus::PENDING;
+        $order->save();
+
+        // $order->calcOrderTotals();
+        // $order->save();
+
+        return redirect()->route('front:products:index');
     }
 
     /**
