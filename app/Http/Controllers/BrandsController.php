@@ -15,7 +15,7 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        $brands = Brand::where('user_id', Auth::user()->id)->get();
+        $brands = Brand::where('user_id', Auth::id())->get();
 
         return view('front/brands/index', compact('brands'));
     }
@@ -41,7 +41,7 @@ class BrandsController extends Controller
         $brand = new Brand;
 
         $brand->name = $request->input('name');
-        $brand->user_id = Auth::user()->id;
+        $brand->user_id = Auth::id();
         $brand->save();
 
         return redirect()->route('front:brands:index');

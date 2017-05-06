@@ -7,6 +7,7 @@ use App\ModelAdapters\BrandAdapter as Brand;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\StoreProduct;
+use App\Utils\CookieTool;
 
 class ProductsController extends Controller
 {
@@ -15,11 +16,21 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::orderBy('name')->get();
 
-        return view('home', compact('products'));
+        $response = response()->view('home', compact('products'));
+
+        $cookie = $request->cookie('laravel_visitor_session');
+        if (!$cookie) {
+            $cookieTool = new CookieTool('laravel_visitor_session');
+            $cookie = cookie($cookieTool->name, $cookieTool->cookieString, $cookieTool->duration);
+
+            return $response->cookie($cookie);
+        }
+
+        return $response;
     }
 
     /**
@@ -29,7 +40,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $brands = Brand::where('user_id', Auth::user()->id)->get();
+        $brands = Brand::where('user_id', Auth::id())->get();
 
         return view('front/products/create', compact('brands'));
     }
@@ -52,7 +63,7 @@ class ProductsController extends Controller
 
         $product->brand_id = $request->input('brand_id');
 
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
         $product->user_id = $userId;
 
         $product->save();

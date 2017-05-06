@@ -4168,16 +4168,29 @@ a.text-danger:not(.btn):hover {
   flex-direction: row;
   display: -ms-flexbox;
   display: flex;
-  min-height: 140px;
+  min-height: 98px;
   border: 1px solid #F7F7F9;
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 
+.products-cart-list .product > div {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 98px;
+}
+
+.products-cart-list .product > div:not(.product-img) {
+  padding: 1rem;
+}
+
 .products-cart-list .product-img {
-  width: 140px;
-  position: initial;
+  width: 98px;
 }
 
 .products-cart-list .product-img img {
@@ -4185,64 +4198,72 @@ a.text-danger:not(.btn):hover {
   width: 100%;
 }
 
-.products-cart-list .product-name-price {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  display: -ms-flexbox;
-  display: flex;
+.products-cart-list .product-name {
+  width: 45%;
+}
+
+.products-cart-list .product-price {
+  width: 10%;
+}
+
+.products-cart-list .product-amount {
   width: 30%;
 }
 
-.products-cart-list .product-name-price > div {
-  -ms-flex-direction: column;
-  flex-direction: column;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 140px;
+.products-cart-list .amount-total {
+  width: 10%;
 }
 
-.products-cart-list .product-overlay {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  display: -ms-flexbox;
-  display: flex;
-  background-color: transparent;
-  position: initial;
-  opacity: 1;
-  width: 70%;
+.products-cart-list .product-removal {
+  width: 5%;
+  text-align: center;
 }
 
-.products-cart-list .product-overlay .top {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.products-cart-list .product-overlay .actions {
-  -ms-flex-direction: row;
-  flex-direction: row;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0.5rem;
-}
-
-.products-cart-list .product-overlay .actions .main {
-  width: 60%;
-}
-
-.products-cart-list .product-overlay .actions .secondary {
-  width: 40%;
-}
-
-.products-cart-list .product-overlay .product-name-price {
+.products-cart-list .product-removal:hover {
+  background-color: #d9534f;
+  cursor: pointer;
   color: white;
+}
+
+.products-cart-list .totals {
+  flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.products-cart-list .totals > div {
+  padding: 1rem;
+}
+
+.products-cart-list .totals > div:first-child {
+  width: 98px;
+}
+
+.products-cart-list .totals > div:nth-child(2) {
+  width: 45%;
+}
+
+.products-cart-list .totals > div:nth-child(3) {
+  width: 10%;
+}
+
+.products-cart-list .totals .concept,
+.products-cart-list .totals .amount {
+  border: 1px solid #F7F7F9;
+}
+
+.products-cart-list .totals .concept {
+  width: 30%;
+  text-align: right;
+}
+
+.products-cart-list .totals .amount {
+  width: 15%;
 }
 
 .front-dashboard-menu {
@@ -4282,4 +4303,37 @@ a.text-danger:not(.btn):hover {
 
 .front-dashboard-menu .menu-item:hover:last-child, .front-dashboard-menu .menu-item.active:last-child {
   border-right: none;
+}
+
+.products-cart-wrapper {
+  background-color: white;
+}
+
+.products-cart-wrapper .actions {
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+  border-top: 1px solid #F7F7F9;
+}
+
+.products-cart-wrapper .actions > div {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  min-height: 70px;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.products-cart-wrapper .actions > div:hover {
+  background-color: #0275d8;
+  cursor: pointer;
+  color: white;
 }

@@ -15,7 +15,7 @@ class CreateProductsCartTable extends Migration
     {
         Schema::create('products_cart', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('session')->unique()->comment('A user laravel_session cookie. If the cookie changes, the cart will not longer be available.');
+            $table->string('session')->comment('A user laravel_session cookie. If the cookie changes, the cart will not longer be available.');
             $table->integer('product_id')->unsigned();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('status_id')->unsigned()->comment('Determines a user shopping cart status. It can be in_session if the user is still shopping no matter if it is logged in or not; in_order if the user already ordered the products.');

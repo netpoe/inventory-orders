@@ -1,5 +1,10 @@
-$product-item-height-control: 140px;
+$product-item-height-control: 98px;
 $product-item-width-control: 100%;
+$product-name-width-control: 45%;
+$product-price-width-control: 10%;
+$product-amount-width-control: 30%;
+$product-amount-total-width-control: 10%;
+$product-removal-width-control: 5%;
 
 .products-cart-list {
   .product {
@@ -10,48 +15,74 @@ $product-item-width-control: 100%;
     position: relative;
     overflow: hidden;
     width: 100%;
+    > div {
+      @include flex-column-center;
+      min-height: $product-item-height-control;
+      &:not(.product-img) {
+        padding: get-spacer(3, x);
+      }
+    }
   }
   .product-img {
     width: $product-item-height-control;
-    position: initial;
     img {
       height: auto;
       width: 100%;
     }
   }
-  .product-name-price {
-    @include flex-row-space-between;
-    > div {
-      @include flex-column;
-      min-height: $product-item-height-control;
+  .product-name {
+    width: $product-name-width-control;
+  }
+  .product-price {
+    width: $product-price-width-control;
+  }
+  .product-amount {
+    width: $product-amount-width-control;
+  }
+  .amount-total {
+    width: $product-amount-total-width-control;
+  }
+  .product-removal {
+    width: $product-removal-width-control;
+    text-align: center;
+    &:hover {
+      background-color: $brand-danger;
+      cursor: pointer;
+      color: white;
     }
-    width: 30%;
   }
   .name,
   .price {}
   .name {}
   .price {}
-  .product-overlay {
-    @include flex-column-space-between;
-    background-color: transparent;
-    position: initial;
-    opacity: 1;
-    width: 70%;
-    .top {
-      @include flex-row-space-between;
-    }
-    .actions {
-      @include flex-row;
-      padding: get-spacer(2, x);
-      .main {
-        width: 60%;
+}
+
+.products-cart-list {
+  .totals {
+    @include flex-basis($product-item-width-control);
+    @include flex-row-end;
+    > div {
+      padding: get-spacer(3, x);
+      &:first-child {
+        width: $product-item-height-control;
       }
-      .secondary {
-        width: 40%;
+      &:nth-child(2) {
+        width: $product-name-width-control;
+      }
+      &:nth-child(3) {
+        width: $product-price-width-control;
       }
     }
-    .product-name-price {
-      color: white;
+    .concept,
+    .amount {
+      border: 1px solid $gray-lightest;
+    }
+    .concept {
+      width: $product-amount-width-control;
+      text-align: right;
+    }
+    .amount {
+      width: $product-amount-total-width-control + $product-removal-width-control;
     }
   }
 }

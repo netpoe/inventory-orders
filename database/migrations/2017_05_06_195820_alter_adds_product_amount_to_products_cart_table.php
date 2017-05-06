@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FkOrdersToProductsCart extends Migration
+class AlterAddsProductAmountToProductsCartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class FkOrdersToProductsCart extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('products_cart_session')->references('session')->on('products_cart');
+        Schema::table('products_cart', function (Blueprint $table) {
+            $table->integer('product_amount')->length(6)->unsigned()->default(0)->after('product_id');
         });
     }
 }

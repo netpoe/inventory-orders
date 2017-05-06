@@ -15,7 +15,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $products = Product::where('user_id', Auth::user()->id)->get();
+        $products = Product::where('user_id', Auth::id())->get();
 
         return view('front/products/index', compact('products'));
     }

@@ -20,13 +20,26 @@
       <section class="products-wrapper">
         <div class="row">
           <div class="col-sm-8 p-3">
-              <fieldset class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">Nombre del producto</label>
-                <input name="name" type="text" value="{{ old('name') }}" class="form-control form-control-lg" autofocus required>
-                @if ($errors->has('name'))
-                  <span class="help-block">{{ $errors->first('name') }}</span>
-                @endif
-              </fieldset>
+              <div class="row">
+                <div class="col-sm-9">
+                  <fieldset class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                    <label for="name">Nombre del producto</label>
+                    <input name="name" type="text" value="{{ old('name') }}" class="form-control form-control-lg" autofocus required>
+                    @if ($errors->has('name'))
+                      <span class="help-block">{{ $errors->first('name') }}</span>
+                    @endif
+                  </fieldset>
+                </div>
+                <div class="col-sm-3">
+                  <fieldset class="form-group {{ $errors->has('stock') ? 'has-error' : '' }}">
+                    <label for="stock">Stock</label>
+                    <input name="stock" type="number" value="{{ old('stock') }}" class="form-control form-control-lg" required>
+                    @if ($errors->has('name'))
+                      <span class="help-block">{{ $errors->first('stock') }}</span>
+                    @endif
+                  </fieldset>
+                </div>
+              </div>
               <fieldset class="form-group {{ $errors->has('brand_id') ? 'has-error' : '' }}">
                 <label for="brand_id">Marca asociada al producto</label>
                 <select name="brand_id" value="{{ old('brand_id') }}" required class="form-control form-control-lg">
@@ -63,7 +76,7 @@
               @endif
               <fieldset class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                 <label for="description">Descripción</label>
-                <textarea name="description" value="{{ old('description') }}" type="text" class="form-control form-control-lg"></textarea>
+                <textarea name="description" type="text" class="form-control form-control-lg">{{ old('description') }}</textarea>
                 @if ($errors->has('description'))
                   <span class="help-block">{{ $errors->first('description') }}</span>
                 @endif
