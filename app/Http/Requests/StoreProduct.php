@@ -31,6 +31,8 @@ class StoreProduct extends FormRequest
             'discount' => 'nullable|numeric',
             'brand_id' => 'required|integer',
             'stock' => 'integer',
+            'status_id' => 'required|integer',
+            'tax_id' => 'nullable|integer',
         ];
     }
 }

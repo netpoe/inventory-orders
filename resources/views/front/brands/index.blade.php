@@ -5,8 +5,8 @@
 @endsection
 
 @section('dashboard-sub-menu-items')
-  <a href="#">Mis marcas</a>
-  <a href="#">Crear</a>
+  <a href="{{ route('front:brands:index') }}">Mis marcas</a>
+  <a href="{{ route('front:brands:create') }}">Crear</a>
 @endsection
 
 @section('content')

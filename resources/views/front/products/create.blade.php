@@ -5,8 +5,8 @@
 @endsection
 
 @section('dashboard-sub-menu-items')
-<a href="#">Mis productos</a>
-<a href="#">Crear</a>
+<a href="{{ route('front:products:index') }}">Mis productos</a>
+<a href="{{ route('front:products:create') }}">Crear</a>
 @endsection
 
 @section('content')
@@ -52,17 +52,28 @@
                 @endif
               </fieldset>
               <div class="row">
-                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="cost">Costo</label>
-                  <input name="cost" value="{{ old('cost') }}" type="text" class="form-control form-control-lg" required>
+                  <input name="cost" value="{{ old('cost') }}" type="text" class="form-control" required>
                 </fieldset>
-                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="price">Precio</label>
-                  <input name="price" value="{{ old('price') }}" type="text" class="form-control form-control-lg" required>
+                  <input name="price" value="{{ old('price') }}" type="text" class="form-control" required>
                 </fieldset>
-                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+              </div>
+              <div class="row">
+                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="discount">Descuento</label>
-                  <input name="discount" value="{{ old('discount') }}" type="text" class="form-control form-control-lg">
+                  <input name="discount" value="{{ old('discount') }}" type="text" class="form-control">
+                </fieldset>
+                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                  <label for="tax_id">Impuestos</label>
+                  <select name="tax_id" value="{{ old('tax_id') }}" class="form-control">
+                    <option value="">Selecciona</option>
+                    @foreach ($luProductTaxSchema as $tax)
+                      <option value="{{ $tax->id }}">{{ $tax->tax }}</option>
+                    @endforeach
+                  </select>
                 </fieldset>
               </div>
               @if ($errors->has('cost'))
@@ -92,10 +103,10 @@
           </div>
           <div class="col-sm-4 p-3">
             <fieldset class="form-group {{ $errors->has('status_id') ? 'has-error' : '' }}">
-              <label for="status_id">Descuento</label>
+              <label for="status_id">Estatus</label>
               <select name="status_id" value="{{ old('status_id') }}" required class="form-control form-control-lg">
-                @foreach ($brands as $brand)
-                  <option value="{{ $brand->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $brand->name }}</option>
+                @foreach ($luProductStatus as $status)
+                  <option value="{{ $status->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $status->status }}</option>
                 @endforeach
               </select>
             </fieldset>

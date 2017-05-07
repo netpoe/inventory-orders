@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ModelAdapters\ProductAdapter as Product;
 use App\ModelAdapters\BrandAdapter as Brand;
+use App\ModelAdapters\LuProductStatusAdapter as LuProductStatus;
+use App\ModelAdapters\LuProductTaxSchemaAdapter as LuProductTaxSchema;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\StoreProduct;
@@ -41,8 +43,12 @@ class ProductsController extends Controller
     public function create()
     {
         $brands = Brand::where('user_id', Auth::id())->get();
+        $luProductStatus = LuProductStatus::all();
+        $luProductTaxSchema = LuProductTaxSchema::all();
 
-        return view('front/products/create', compact('brands'));
+        $params = compact('brands', 'luProductStatus', 'luProductTaxSchema');
+
+        return view('front/products/create', $params);
     }
 
     /**
@@ -62,6 +68,8 @@ class ProductsController extends Controller
         $product->discount = $request->input('discount');
 
         $product->brand_id = $request->input('brand_id');
+        $product->status_id = $request->input('status_id');
+        $product->tax_id = $request->input('tax_id');
 
         $userId = Auth::id();
         $product->user_id = $userId;
