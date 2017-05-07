@@ -16,7 +16,7 @@ $totals-amount-width-control: 35%;
     position: relative;
     overflow: hidden;
     width: 100%;
-    > div {
+    > div, a {
       @include flex-column-center;
       min-height: $product-item-height-control;
       &:not(.product-img) {
@@ -60,6 +60,7 @@ $totals-amount-width-control: 35%;
   .product-removal {
     width: $product-removal-width-control;
     text-align: center;
+    position: relative;
     &:hover {
       background-color: $brand-danger;
       cursor: pointer;
@@ -99,5 +100,8 @@ $totals-amount-width-control: 35%;
       width: $totals-amount-width-control;
       text-align: right;
     }
+  }
+  .shipping-payment-details {
+    padding: get-spacer(3, x);
   }
 }

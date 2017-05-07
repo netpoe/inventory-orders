@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('products_cart_session')->unique()->comment('A group of products to be delivered');
             $table->integer('status_id')->unsigned()->default(1)->comment('Defines the status of the order: pending | paid | in_transit | delivered | returned');
             $table->decimal('subtotal', 13, 2)->unsigned()->nullable();
-            $table->decimal('taxes', 2, 2)->unsigned()->nullable();
+            $table->integer('tax_id')->unsigned()->nullable();
             $table->decimal('discount', 2, 2)->unsigned()->nullable();
             $table->decimal('total', 13, 2)->unsigned()->nullable();
             $table->dateTime('deliver_at')->nullable();

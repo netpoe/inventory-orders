@@ -52,28 +52,17 @@
                 @endif
               </fieldset>
               <div class="row">
-                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="cost">Costo</label>
                   <input name="cost" value="{{ old('cost') }}" type="text" class="form-control" required>
                 </fieldset>
-                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="price">Precio</label>
                   <input name="price" value="{{ old('price') }}" type="text" class="form-control" required>
                 </fieldset>
-              </div>
-              <div class="row">
-                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                <fieldset class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                   <label for="discount">Descuento</label>
                   <input name="discount" value="{{ old('discount') }}" type="text" class="form-control">
-                </fieldset>
-                <fieldset class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                  <label for="tax_id">Impuestos</label>
-                  <select name="tax_id" value="{{ old('tax_id') }}" class="form-control">
-                    <option value="">Selecciona</option>
-                    @foreach ($luProductTaxSchema as $tax)
-                      <option value="{{ $tax->id }}">{{ $tax->tax }}</option>
-                    @endforeach
-                  </select>
                 </fieldset>
               </div>
               @if ($errors->has('cost'))

@@ -37,46 +37,49 @@
                 <span>{{ $product->amountOnCart() }}</span>
               </div>
               <div class="amount-total">
-                <span>{{ $product->price }}</span>
+                <span>{{ $product->total() }}</span>
               </div>
-              <div class="product-removal">
-                <a href="{{ route('cart:index') }}"><i class="icon-pencil"></i></a>
-              </div>
+              <a href="{{ route('cart:index') }}" class="product-removal">
+                <i class="icon-pencil"></i>
+              </a>
             </article>
           @endforeach
           <div class="summary">
-            <div>&nbsp;</div>
+            <div class="shipping-payment-details">
+              <h5>Detalles del envío</h5>
+              <h5>Detalles del pago</h5>
+            </div>
             <div class="totals">
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Subtotal: </strong>
+                  <strong>Subtotal:</strong>
                 </div>
                 <div class="amount">
-                  <strong>68.00</strong>
+                  <strong>{{ $order->subtotal }}</strong>
                 </div>
               </div>
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Descuento: </strong>
+                  <strong>Descuento:</strong>
                 </div>
                 <div class="amount">
-                  <strong>68.00</strong>
+                  <strong>{{ $order->discount }}</strong>
                 </div>
               </div>
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Impuestos: </strong>
+                  <strong>Impuestos:</strong>
                 </div>
                 <div class="amount">
-                  <strong>68.00</strong>
+                  <strong>{{ $order->getTax() }}</strong>
                 </div>
               </div>
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Total: </strong>
+                  <strong>Total:</strong>
                 </div>
                 <div class="amount">
-                  <strong>68.00</strong>
+                  <strong>{{ $order->total }}</strong>
                 </div>
               </div>
             </div>

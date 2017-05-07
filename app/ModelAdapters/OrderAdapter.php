@@ -3,8 +3,38 @@
 namespace App\ModelAdapters;
 
 use App\Order;
+use App\ModelAdapters\ProductsCartAdapter as ProductsCart;
 
 class OrderAdapter extends Order
 {
+    public function calcTotals()
+    {
+        $session = $this->products_cart_session;
 
+        $cart = new ProductsCart;
+        $products = $cart->getProductsInSession($session);
+
+        $this->subtotal = 0.0;
+        $this->discount = 0.0;
+        $this->total = 0.0;
+
+        foreach ($products as $product) {
+            $subtotal = ($product->price * $product->amountOnCart()) / (1 + $product->discount);
+            $this->subtotal += round($subtotal, 2);
+            $total = $this->subtotal / (1 + 0.0);
+            $this->total += round($total, 2);
+        }
+
+        return $this;
+    }
+
+    public function getTax()
+    {
+        if ($this->tax) {
+            $tax = $this->subtotal * (1 + $this->tax->tax);
+            return round($tax, 2);
+        }
+
+        return 0.0;
+    }
 }

@@ -70,7 +70,6 @@ class ProductsController extends Controller
 
         $product->brand_id = $request->input('brand_id');
         $product->status_id = $request->input('status_id');
-        $product->tax_id = $request->input('tax_id');
 
         $userId = Auth::id();
         $product->user_id = $userId;

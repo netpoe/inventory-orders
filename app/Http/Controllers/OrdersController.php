@@ -23,12 +23,16 @@ class OrdersController extends Controller
 
     public function confirmation(Request $request)
     {
-        $cookie = $request->cookie('laravel_visitor_session');
+        $session = $request->cookie('laravel_visitor_session');
 
         $productsCart = new ProductsCart;
-        $products = $productsCart->getProductsInSession($cookie);
+        $products = $productsCart->getProductsInSession($session);
 
-        return view('front/orders/confirmation', compact('products'));
+        $order = new Order;
+        $order->products_cart_session = $session;
+        $order->calcTotals();
+
+        return view('front/orders/confirmation', compact('products', 'order'));
     }
 
     /**
@@ -55,10 +59,10 @@ class OrdersController extends Controller
         $order->user_id = Auth::id();
         $order->products_cart_session = $session;
         $order->status_id = LuOrderStatus::PENDING;
-        $order->save();
 
-        // $order->calcOrderTotals();
-        // $order->save();
+        $order->calcTotals();
+
+        $order->save();
 
         return redirect()->route('front:products:index');
     }

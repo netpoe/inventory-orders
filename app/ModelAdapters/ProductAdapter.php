@@ -21,4 +21,10 @@ class ProductAdapter extends Product
     {
         return $this->cart->product_amount;
     }
+
+    public function total()
+    {
+        $total = ($this->price * $this->amountOnCart()) / (1 + $this->discount);
+        return round($total, 2);
+    }
 }
