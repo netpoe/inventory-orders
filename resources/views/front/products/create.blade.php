@@ -91,6 +91,17 @@
               </fieldset> -->
           </div>
           <div class="col-sm-4 p-3">
+            <fieldset class="form-group {{ $errors->has('status_id') ? 'has-error' : '' }}">
+              <label for="status_id">Descuento</label>
+              <select name="status_id" value="{{ old('status_id') }}" required class="form-control form-control-lg">
+                @foreach ($brands as $brand)
+                  <option value="{{ $brand->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $brand->name }}</option>
+                @endforeach
+              </select>
+            </fieldset>
+            @if ($errors->has('status_id'))
+              <span class="help-block">{{ $errors->first('status_id') }}</span>
+            @endif
             <fieldset class="form-group">
               <label>&nbsp;</label>
               <button type="submit" class="btn btn-primary btn-lg btn-block">Publicar</button>
