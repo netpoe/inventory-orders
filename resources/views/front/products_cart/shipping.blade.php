@@ -55,7 +55,7 @@
             {{ csrf_field() }}
             <fieldset class="form-group {{ $errors->has('zip_code') ? 'has-error' : '' }}">
               <label for="zip_code">Código postal</label>
-              <input name="zip_code" type="text" class="form-control form-control-lg" required>
+              <input name="zip_code" type="text" class="form-control form-control-lg" required value="{{ old('zip_code') }}">
               @if ($errors->has('zip_code'))
                 <span class="help-block">{{ $errors->first('zip_code') }}</span>
               @endif
@@ -63,7 +63,7 @@
             <div class="grid-list grid-list-2 grid-list-1-xs">
               <fieldset class="grid-list-item form-group {{ $errors->has('country_id') ? 'has-error' : '' }}">
                 <label for="country_id">País</label>
-                <select name="country_id" class="form-control form-control-lg" required>
+                <select name="country_id" class="form-control form-control-lg" required value="{{ old('country_id') }}">
                   @foreach ($countries as $country)
                     <option value="{{ $country->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $country->country }}</option>
                   @endforeach
@@ -74,7 +74,7 @@
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('state_id') ? 'has-error' : '' }}">
                 <label for="state_id">Estado</label>
-                <select name="state_id" class="form-control form-control-lg" required>
+                <select name="state_id" class="form-control form-control-lg" required value="{{ old('state_id') }}">
                   @foreach ($states as $state)
                     <option value="{{ $state->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $state->state }}</option>
                   @endforeach
@@ -85,28 +85,28 @@
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                 <label for="city">Ciudad</label>
-                <input name="city" type="text" class="form-control form-control-lg" required>
+                <input name="city" type="text" class="form-control form-control-lg" required value="{{ old('city') }}">
                 @if ($errors->has('city'))
                   <span class="help-block">{{ $errors->first('city') }}</span>
                 @endif
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('street') ? 'has-error' : '' }}">
                 <label for="street">Calle y número</label>
-                <input name="street" type="text" class="form-control form-control-lg" required>
+                <input name="street" type="text" class="form-control form-control-lg" required value="{{ old('street') }}">
                 @if ($errors->has('street'))
                   <span class="help-block">{{ $errors->first('street') }}</span>
                 @endif
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('neighborhood') ? 'has-error' : '' }}">
                 <label for="neighborhood">Colonia</label>
-                <input name="neighborhood" type="text" class="form-control form-control-lg" required>
+                <input name="neighborhood" type="text" class="form-control form-control-lg" required value="{{ old('neighborhood') }}">
                 @if ($errors->has('neighborhood'))
                   <span class="help-block">{{ $errors->first('neighborhood') }}</span>
                 @endif
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('interior') ? 'has-error' : '' }}">
                 <label for="interior">Interior (opcional)</label>
-                <input name="interior" type="text" class="form-control form-control-lg">
+                <input name="interior" type="text" class="form-control form-control-lg" value="{{ old('interior') }}">
                 @if ($errors->has('interior'))
                   <span class="help-block">{{ $errors->first('interior') }}</span>
                 @endif
@@ -116,14 +116,14 @@
             <div class="row">
               <fieldset class="col-sm-6 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label for="email">Correo electrónico</label>
-                <input name="email" type="email" class="form-control form-control-lg" required>
+                <input name="email" type="email" class="form-control form-control-lg" required value="{{ old('email') }}">
                 @if ($errors->has('email'))
                   <span class="help-block">{{ $errors->first('email') }}</span>
                 @endif
               </fieldset>
               <fieldset class="col-sm-6 form-group {{ $errors->has('mobile_number') ? 'has-error' : '' }}">
                 <label for="mobile_number">Teléfono móvil</label>
-                <input name="mobile_number" type="text" class="form-control form-control-lg" required>
+                <input name="mobile_number" type="text" class="form-control form-control-lg" required value="{{ old('mobile_number') }}">
                 @if ($errors->has('mobile_number'))
                   <span class="help-block">{{ $errors->first('mobile_number') }}</span>
                 @endif
@@ -132,21 +132,21 @@
             <div class="grid-list grid-list-3 grid-list-1-xs">
               <fieldset class="grid-list-item form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 <label for="name">Nombre</label>
-                <input name="name" type="text" class="form-control form-control-lg" required>
+                <input name="name" type="text" class="form-control form-control-lg" required value="{{ old('name') }}">
                 @if ($errors->has('name'))
                   <span class="help-block">{{ $errors->first('name') }}</span>
                 @endif
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('paternal_last_name') ? 'has-error' : '' }}">
                 <label for="paternal_last_name">Apellido paterno</label>
-                <input name="paternal_last_name" type="text" class="form-control form-control-lg" required>
+                <input name="paternal_last_name" type="text" class="form-control form-control-lg" required value="{{ old('paternal_last_name') }}">
                 @if ($errors->has('paternal_last_name'))
                   <span class="help-block">{{ $errors->first('paternal_last_name') }}</span>
                 @endif
               </fieldset>
               <fieldset class="grid-list-item form-group {{ $errors->has('maternal_last_name') ? 'has-error' : '' }}">
                 <label for="maternal_last_name">Apellido materno</label>
-                <input name="maternal_last_name" type="text" class="form-control form-control-lg" required>
+                <input name="maternal_last_name" type="text" class="form-control form-control-lg" required value="{{ old('maternal_last_name') }}">
                 @if ($errors->has('maternal_last_name'))
                   <span class="help-block">{{ $errors->first('maternal_last_name') }}</span>
                 @endif

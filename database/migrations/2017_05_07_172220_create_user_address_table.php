@@ -24,5 +24,8 @@ class CreateUserAddressTable extends Migration
             $table->string('neighborhood');
             $table->timestamps();
         });
+        Schema::table('user_address', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 }

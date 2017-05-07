@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\ModelAdapters\ProductsCartAdapter as ProductsCart;
 use App\ModelAdapters\LuProductsCartStatusAdapter as LuProductsCartStatus;
 use App\ModelAdapters\ProductAdapter as Product;
-use App\ModelAdapters\LuUserAddressAdapter as LuUserAddress;
+use App\ModelAdapters\UserAddressAdapter as UserAddress;
+use App\ModelAdapters\UserAdapter as User;
+use App\ModelAdapters\LuUserRoleAdapter as LuUserRole;
 use App\ModelAdapters\LuAddressCountryAdapter as LuAddressCountry;
 use App\ModelAdapters\LuAddressStateAdapter as LuAddressState;
 use Illuminate\Http\Request;
 use Auth;
 use App\Utils\CookieTool;
+use App\Utils\StringTool;
 use App\Http\Requests\StoreProductsCartAmount;
 
 class ProductsCartController extends Controller
@@ -116,6 +119,35 @@ class ProductsCartController extends Controller
 
     public function setShippingAddress(Request $request)
     {
+        $email = $request->input('email');
+        $password = StringTool::getRandomString(12);
+        if (!Auth::check()) {
+            User::create([
+                'email' => $email,
+                'mobile_number' => $request->input('mobile_number'),
+                'name' => $request->input('name'),
+                'paternal_last_name' => $request->input('paternal_last_name'),
+                'maternal_last_name' => $request->input('maternal_last_name'),
+                'password' => bcrypt($password),
+                'role_id' => LuUserRole::CLIENT,
+            ]);
+            if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+                throw new Exception('No hemos podido guardar tus datos');
+            }
+        }
+
+        $userAddress = new UserAddress;
+
+        $userAddress->user_id = Auth::id();
+        $userAddress->zip_code = $request->input('zip_code');
+        $userAddress->country_id = $request->input('country_id');
+        $userAddress->state_id = $request->input('state_id');
+        $userAddress->city = $request->input('city');
+        $userAddress->street = $request->input('street');
+        $userAddress->neighborhood = $request->input('neighborhood');
+        $userAddress->interior = $request->input('interior');
+
+        $userAddress->save();
 
         return redirect()->route('cart:set-payment');
     }
