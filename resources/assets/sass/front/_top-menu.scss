@@ -7,13 +7,36 @@ $top-menu-height-control: 56px;
   .top-menu-left,
   .top-menu-center,
   .top-menu-right {
-    @include flex-column-center;
-    min-height: $top-menu-height-control;
+    text-align: center;
+    width: 33.33%;
+    > nav {
+      > a, div {
+        @include flex-column-center;
+        min-height: $top-menu-height-control;
+        padding: 0 get-spacer(3, x);
+        color: white;
+      }
+    }
   }
-  .top-menu-left {}
-  .top-menu-center {}
-  .top-menu-right {}
-  .logo {
-    color: white;
+  .top-menu-left {
+    @include flex-row;
   }
+  .top-menu-center {
+    > nav {
+      @include flex-row-center;
+    }
+  }
+  .top-menu-right {
+    @include flex-row-end;
+    > nav {
+      a, div {
+        border-right: 1px solid darken($brand-info, 7%);
+        border-left: 1px solid darken($brand-info, 7%);
+        &:hover {
+          background-color: darken($brand-info, 7%);
+        }
+      }
+    }
+  }
+  .logo {}
 }

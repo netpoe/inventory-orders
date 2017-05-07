@@ -3427,6 +3427,15 @@ select.form-control-lg:not([size]):not([multiple]) {
 .top-menu .top-menu-left,
 .top-menu .top-menu-center,
 .top-menu .top-menu-right {
+  text-align: center;
+  width: 33.33%;
+}
+
+.top-menu .top-menu-left > nav > a, .top-menu .top-menu-left > nav div,
+.top-menu .top-menu-center > nav > a,
+.top-menu .top-menu-center > nav div,
+.top-menu .top-menu-right > nav > a,
+.top-menu .top-menu-right > nav div {
   -ms-flex-pack: center;
   justify-content: center;
   -ms-flex-direction: column;
@@ -3434,10 +3443,42 @@ select.form-control-lg:not([size]):not([multiple]) {
   display: -ms-flexbox;
   display: flex;
   min-height: 56px;
+  padding: 0 1rem;
+  color: white;
 }
 
-.top-menu .logo {
-  color: white;
+.top-menu .top-menu-left {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top-menu .top-menu-center > nav {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top-menu .top-menu-right {
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top-menu .top-menu-right > nav a, .top-menu .top-menu-right > nav div {
+  border-right: 1px solid #0262b5;
+  border-left: 1px solid #0262b5;
+}
+
+.top-menu .top-menu-right > nav a:hover, .top-menu .top-menu-right > nav div:hover {
+  background-color: #0262b5;
 }
 
 .header {
@@ -8323,45 +8364,6 @@ a.text-danger:not(.btn):hover {
   padding: 1rem;
 }
 
-.front-dashboard-menu {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  display: -ms-flexbox;
-  display: flex;
-  border-bottom: 1px solid #F7F7F9;
-}
-
-.front-dashboard-menu .menu-item {
-  -ms-flex-pack: center;
-  justify-content: center;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  display: -ms-flexbox;
-  display: flex;
-  border-right: 1px solid #F7F7F9;
-  background-color: white;
-  min-height: 56px;
-  text-align: center;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.front-dashboard-menu .menu-item:last-child {
-  border-right: none;
-}
-
-.front-dashboard-menu .menu-item:hover, .front-dashboard-menu .menu-item.active {
-  background-color: #0262b5;
-  border-right: 1px solid #0275d8;
-  color: white;
-}
-
-.front-dashboard-menu .menu-item:hover:last-child, .front-dashboard-menu .menu-item.active:last-child {
-  border-right: none;
-}
-
 .products-cart-wrapper {
   background-color: white;
 }
@@ -8402,4 +8404,43 @@ a.text-danger:not(.btn):hover {
 
 .products-cart-wrapper .actions > .form-group button {
   min-height: 56px;
+}
+
+.front-dashboard-menu {
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #F7F7F9;
+}
+
+.front-dashboard-menu .menu-item {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  border-right: 1px solid #F7F7F9;
+  background-color: white;
+  min-height: 56px;
+  text-align: center;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.front-dashboard-menu .menu-item:last-child {
+  border-right: none;
+}
+
+.front-dashboard-menu .menu-item:hover, .front-dashboard-menu .menu-item.active {
+  background-color: #0262b5;
+  border-right: 1px solid #0275d8;
+  color: white;
+}
+
+.front-dashboard-menu .menu-item:hover:last-child, .front-dashboard-menu .menu-item.active:last-child {
+  border-right: none;
 }

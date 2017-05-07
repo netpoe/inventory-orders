@@ -3427,6 +3427,15 @@ select.form-control-lg:not([size]):not([multiple]) {
 .top-menu .top-menu-left,
 .top-menu .top-menu-center,
 .top-menu .top-menu-right {
+  text-align: center;
+  width: 33.33%;
+}
+
+.top-menu .top-menu-left > nav > a, .top-menu .top-menu-left > nav div,
+.top-menu .top-menu-center > nav > a,
+.top-menu .top-menu-center > nav div,
+.top-menu .top-menu-right > nav > a,
+.top-menu .top-menu-right > nav div {
   -ms-flex-pack: center;
   justify-content: center;
   -ms-flex-direction: column;
@@ -3434,10 +3443,42 @@ select.form-control-lg:not([size]):not([multiple]) {
   display: -ms-flexbox;
   display: flex;
   min-height: 56px;
+  padding: 0 1rem;
+  color: white;
 }
 
-.top-menu .logo {
-  color: white;
+.top-menu .top-menu-left {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top-menu .top-menu-center > nav {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top-menu .top-menu-right {
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top-menu .top-menu-right > nav a, .top-menu .top-menu-right > nav div {
+  border-right: 1px solid #0262b5;
+  border-left: 1px solid #0262b5;
+}
+
+.top-menu .top-menu-right > nav a:hover, .top-menu .top-menu-right > nav div:hover {
+  background-color: #0262b5;
 }
 
 .header {

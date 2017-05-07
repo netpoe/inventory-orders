@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\ModelAdapters\ProductsCartAdapter as ProductsCart;
 use App\ModelAdapters\LuProductsCartStatusAdapter as LuProductsCartStatus;
 use App\ModelAdapters\ProductAdapter as Product;
+use App\ModelAdapters\LuUserAddressAdapter as LuUserAddress;
+use App\ModelAdapters\LuAddressCountryAdapter as LuAddressCountry;
+use App\ModelAdapters\LuAddressStateAdapter as LuAddressState;
 use Illuminate\Http\Request;
 use Auth;
 use App\Utils\CookieTool;
@@ -88,6 +91,33 @@ class ProductsCartController extends Controller
         $cart->setProductsAmount($cookie, $request->input('product.id'));
 
         return redirect()->route('front:orders:confirmation');
+    }
+
+    public function shipping()
+    {
+        $countries = LuAddressCountry::where('is_active', 1)->get();
+        $states = LuAddressState::where('is_active', 1)->get();
+
+        $params = compact('countries', 'states');
+        return view('front/products_cart/shipping', $params);
+    }
+
+    public function login(Request $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect()->route('cart:shipping');
+        }
+
+        // TODO display a flash message about an authentication failure
+        return redirect()->route('cart:shipping');
+    }
+
+    public function setShippingAddress(Request $request)
+    {
+
+        return redirect()->route('cart:set-payment');
     }
 
     /**

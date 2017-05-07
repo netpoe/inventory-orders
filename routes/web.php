@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function(){
 Route::get('/cart', 'ProductsCartController@index')->name('cart:index');
 Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
 Route::post('/cart/set-products-amount', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
+Route::get('/cart/shipping', 'ProductsCartController@shipping')->name('cart:shipping');
+Route::post('/cart/set-shipping-address', 'ProductsCartController@setShippingAddress')->name('cart:set-shipping-address');
+Route::post('/cart/login', 'ProductsCartController@login')->name('cart:login');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/orders', 'OrdersController@index')->name('front:orders:index');

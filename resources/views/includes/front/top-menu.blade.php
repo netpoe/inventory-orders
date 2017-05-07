@@ -1,11 +1,25 @@
 <header class="top-menu">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-4 top-menu-left"></div>
-      <div class="col-sm-4 top-menu-center">
-        <a href="{{ route('products:index') }}" class="logo">home</a>
-      </div>
-      <div class="col-sm-4 top-menu-right"></div>
-    </div>
+  <div class="top-menu-left">
+    <nav></nav>
+  </div>
+  <div class="top-menu-center">
+    <nav>
+      <a href="{{ route('products:index') }}" class="logo">home</a>
+    </nav>
+  </div>
+  <div class="top-menu-right">
+    <nav>
+      @if (Auth::check())
+        <a href="{{ route('logout') }}"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          Salir
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          {{ csrf_field() }}
+        </form>
+      @else
+        <a href="{{ route('login') }}">Ingresa</a>
+      @endif
+    </nav>
   </div>
 </header>
