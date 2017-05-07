@@ -20,7 +20,7 @@ class CreateUserAddressTable extends Migration
             $table->integer('state_id')->unsigned();
             $table->string('city');
             $table->string('street');
-            $table->string('interior');
+            $table->string('interior')->nullable();
             $table->string('neighborhood');
             $table->timestamps();
         });

@@ -25,9 +25,12 @@ class OrdersController extends Controller
     {
         if ($order->status_id == LuOrderStatus::PENDING) {
             $products = $order->getProducts();
+            $address = $order->address;
             $order->calcTotals();
 
-            return view('front/orders/confirmation', compact('products', 'order'));
+            $params = compact('products', 'order', 'address');
+
+            return view('front/orders/confirmation', $params);
         }
 
         return redirect()->route('front:orders:index');

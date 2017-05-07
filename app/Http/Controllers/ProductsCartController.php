@@ -109,14 +109,15 @@ class ProductsCartController extends Controller
 
         $params = compact('countries', 'states');
 
-        if ($order->address_id) {
-            return view('front/products_cart/shipping-edit', $params);
-        }
-
         if (Auth::check()) {
             $user = Auth::user();
             $addresses = $user->addresses;
             $params['addresses'] = $addresses;
+        }
+
+        if ($order->address_id) {
+            $params['addressId'] = $order->address_id;
+            return view('front/products_cart/shipping-edit', $params);
         }
 
         return view('front/products_cart/shipping', $params);
@@ -165,17 +166,18 @@ class ProductsCartController extends Controller
         $userAddress->save();
 
         $session = $request->cookie('laravel_visitor_session');
-        $order = new Order;
-        $canCreateOrder = $order->where('products_cart_session', $session)->get()->isEmpty();
+        $order = Order::where('products_cart_session', $session);
+        $orderData = $order->first();
+        $canCreateOrder = $order->get()->isEmpty();
         if ($canCreateOrder) {
             $order->user_id = Auth::id();
-            $order->address_id = $userAddress->id;
             $order->products_cart_session = $session;
             $order->status_id = LuOrderStatus::PENDING;
             $order->save();
         }
+        $order->update(['address_id' => $userAddress->id]);
 
-        return redirect()->route('front:orders:confirmation', ['order' => $order->id]);
+        return redirect()->route('front:orders:confirmation', ['order' => $orderData->id]);
     }
 
     public function setShippingAddress(Request $request)
@@ -184,17 +186,18 @@ class ProductsCartController extends Controller
         $userAddress = UserAddress::find($addressId);
 
         $session = $request->cookie('laravel_visitor_session');
-        $order = new Order;
-        $canCreateOrder = $order->where('products_cart_session', $session)->get()->isEmpty();
+        $order = Order::where('products_cart_session', $session);
+        $orderData = $order->first();
+        $canCreateOrder = $order->get()->isEmpty();
         if ($canCreateOrder) {
             $order->user_id = Auth::id();
-            $order->address_id = $userAddress->id;
             $order->products_cart_session = $session;
             $order->status_id = LuOrderStatus::PENDING;
             $order->save();
         }
+        $order->update(['address_id' => $userAddress->id]);
 
-        return redirect()->route('front:orders:confirmation', ['order' => $order->id]);
+        return redirect()->route('front:orders:confirmation', ['order' => $orderData->id]);
     }
 
     /**

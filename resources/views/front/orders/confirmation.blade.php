@@ -47,6 +47,7 @@
           <div class="summary">
             <div class="shipping-payment-details">
               <h5>Detalles del envío</h5>
+              <p>{{ $address->getAddressString() }} <a href="{{ route('cart:shipping', ['order' => $order->id]) }}"><i class="icon-pencil"></i></a></p>
               <h5>Detalles del pago</h5>
             </div>
             <div class="totals">

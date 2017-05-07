@@ -12,4 +12,9 @@ class Order extends Model
     {
         return $this->hasOne('\App\ModelAdapters\LuProductTaxSchemaAdapter', 'id', 'tax_id');
     }
+
+    public function address()
+    {
+        return $this->hasOne('\App\ModelAdapters\UserAddressAdapter', 'id', 'address_id');
+    }
 }
