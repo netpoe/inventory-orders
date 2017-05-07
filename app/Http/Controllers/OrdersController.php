@@ -21,18 +21,16 @@ class OrdersController extends Controller
         return view('front/orders/index');
     }
 
-    public function confirmation(Request $request)
+    public function confirmation(Request $request, Order $order)
     {
-        $session = $request->cookie('laravel_visitor_session');
+        if ($order->status_id == LuOrderStatus::PENDING) {
+            $products = $order->getProducts();
+            $order->calcTotals();
 
-        $productsCart = new ProductsCart;
-        $products = $productsCart->getProductsInSession($session);
+            return view('front/orders/confirmation', compact('products', 'order'));
+        }
 
-        $order = new Order;
-        $order->products_cart_session = $session;
-        $order->calcTotals();
-
-        return view('front/orders/confirmation', compact('products', 'order'));
+        return redirect()->route('front:orders:index');
     }
 
     /**
@@ -51,25 +49,12 @@ class OrdersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Order $order)
     {
-        $session = $request->cookie('laravel_visitor_session');
+        $order->calcTotals()->save();
 
-        $order = new Order;
-
-        $orderExists = !$order->where('products_cart_session', $session)->get()->isEmpty();
-        if ($orderExists) {
-            return redirect()->route('front:orders:index');
-        }
-
-        $order->user_id = Auth::id();
-        $order->products_cart_session = $session;
-        $order->status_id = LuOrderStatus::PENDING;
-
-        $order->calcTotals();
-
-        $order->save();
-
+        // TODO perform payment and update stock
+        // If payment fails, the stock should not be updated and should display payment failure notice
         $order->updateProductsStock();
 
         return redirect()->route('front:orders:index');

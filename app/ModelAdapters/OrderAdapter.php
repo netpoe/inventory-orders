@@ -10,10 +10,7 @@ class OrderAdapter extends Order
 {
     public function calcTotals()
     {
-        $session = $this->products_cart_session;
-
-        $cart = new ProductsCart;
-        $products = $cart->getProductsInSession($session);
+        $products = $this->getProducts();
 
         $this->subtotal = 0.0;
         $this->discount = 0.0;
@@ -27,6 +24,16 @@ class OrderAdapter extends Order
         }
 
         return $this;
+    }
+
+    public function getProducts()
+    {
+        $session = $this->products_cart_session;
+
+        $cart = new ProductsCart;
+        $products = $cart->getProductsInSession($session);
+
+        return $products;
     }
 
     public function getTax()

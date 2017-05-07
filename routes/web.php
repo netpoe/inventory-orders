@@ -21,17 +21,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/products', 'FrontController@index')->name('front:products:index');
 });
 
-Route::get('/cart', 'ProductsCartController@index')->name('cart:index');
+Route::get('/cart/{order?}', 'ProductsCartController@index')->name('cart:index');
+Route::get('/cart/edit/{order}', 'ProductsCartController@edit')->name('cart:edit');
 Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
-Route::post('/cart/set-products-amount', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
-Route::get('/cart/shipping', 'ProductsCartController@shipping')->name('cart:shipping');
-Route::post('/cart/set-shipping-address', 'ProductsCartController@setShippingAddress')->name('cart:set-shipping-address');
+Route::post('/cart/set-products-amount/{order?}', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
+Route::get('/cart/shipping/{order?}', 'ProductsCartController@shipping')->name('cart:shipping');
+Route::post('/cart/store-shipping-address', 'ProductsCartController@storeShippingAddress')->name('cart:store-shipping-address');
 Route::post('/cart/login', 'ProductsCartController@login')->name('cart:login');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/orders', 'OrdersController@index')->name('front:orders:index');
-    Route::get('/orders/confirmation', 'OrdersController@confirmation')->name('front:orders:confirmation');
-    Route::post('/orders/store', 'OrdersController@store')->name('front:orders:store');
+    Route::get('/orders/confirmation/{order?}', 'OrdersController@confirmation')->name('front:orders:confirmation');
+    Route::post('/orders/store/{order}', 'OrdersController@store')->name('front:orders:store');
 });
 
 Route::group(['middleware' => 'auth'], function(){

@@ -12,7 +12,7 @@
     <section class="products-cart-wrapper">
       <div class="p-3">
         @if (Auth::check())
-          <form action="{{ route('cart:set-shipping-address') }}" method="POST">
+          <form action="{{ route('cart:store-shipping-address') }}" method="POST">
             {{ csrf_field() }}
             <section class="products-cart-wrapper">
               <div class="actions">
@@ -51,7 +51,7 @@
           </form>
           <div class="text-center mv-2"><strong>ó</strong></div>
           <h5>Escribe la dirección de envío, nosotros crearemos una cuenta por ti</h5>
-          <form method="POST" action="{{ route('cart:set-shipping-address') }}">
+          <form method="POST" action="{{ route('cart:store-shipping-address') }}">
             {{ csrf_field() }}
             <fieldset class="form-group {{ $errors->has('zip_code') ? 'has-error' : '' }}">
               <label for="zip_code">Código postal</label>

@@ -10,6 +10,8 @@ use App\ModelAdapters\UserAdapter as User;
 use App\ModelAdapters\LuUserRoleAdapter as LuUserRole;
 use App\ModelAdapters\LuAddressCountryAdapter as LuAddressCountry;
 use App\ModelAdapters\LuAddressStateAdapter as LuAddressState;
+use App\ModelAdapters\OrderAdapter as Order;
+use App\ModelAdapters\LuOrderStatusAdapter as LuOrderStatus;
 use Illuminate\Http\Request;
 use Auth;
 use App\Utils\CookieTool;
@@ -23,7 +25,7 @@ class ProductsCartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, Order $order)
     {
         $cookie = $request->cookie('laravel_visitor_session');
 
@@ -85,7 +87,7 @@ class ProductsCartController extends Controller
      *
      * @return redirect to cart:shipping
      * */
-    public function setProductsAmount(StoreProductsCartAmount $request)
+    public function setProductsAmount(StoreProductsCartAmount $request, Order $order)
     {
         $cookie = $request->cookie('laravel_visitor_session');
         // TODO if cookie does not exist, create it and redirect
@@ -93,15 +95,24 @@ class ProductsCartController extends Controller
         $cart = new ProductsCart;
         $cart->setProductsAmount($cookie, $request->input('product.id'));
 
-        return redirect()->route('front:orders:confirmation');
+        if ($order) {
+            return redirect()->route('cart:confirmation', ['order' => $order->id]);
+        }
+
+        return redirect()->route('cart:shipping');
     }
 
-    public function shipping()
+    public function shipping(Request $request, Order $order)
     {
         $countries = LuAddressCountry::where('is_active', 1)->get();
         $states = LuAddressState::where('is_active', 1)->get();
 
         $params = compact('countries', 'states');
+
+        if ($order->address_id) {
+            return view('front/products_cart/shipping-edit', $params);
+        }
+
         return view('front/products_cart/shipping', $params);
     }
 
@@ -117,7 +128,7 @@ class ProductsCartController extends Controller
         return redirect()->route('cart:shipping');
     }
 
-    public function setShippingAddress(Request $request)
+    public function storeShippingAddress(Request $request)
     {
         $email = $request->input('email');
         $password = StringTool::getRandomString(12);
@@ -137,7 +148,6 @@ class ProductsCartController extends Controller
         }
 
         $userAddress = new UserAddress;
-
         $userAddress->user_id = Auth::id();
         $userAddress->zip_code = $request->input('zip_code');
         $userAddress->country_id = $request->input('country_id');
@@ -146,10 +156,20 @@ class ProductsCartController extends Controller
         $userAddress->street = $request->input('street');
         $userAddress->neighborhood = $request->input('neighborhood');
         $userAddress->interior = $request->input('interior');
-
         $userAddress->save();
 
-        return redirect()->route('cart:set-payment');
+        $session = $request->cookie('laravel_visitor_session');
+        $order = new Order;
+        $canCreateOrder = $order->where('products_cart_session', $session)->get()->isEmpty();
+        if ($canCreateOrder) {
+            $order->user_id = Auth::id();
+            $order->address_id = $userAddress->id;
+            $order->products_cart_session = $session;
+            $order->status_id = LuOrderStatus::PENDING;
+            $order->save();
+        }
+
+        return redirect()->route('front:orders:confirmation', ['order' => $order->id]);
     }
 
     /**
@@ -169,9 +189,11 @@ class ProductsCartController extends Controller
      * @param  \App\ProductsCart  $productsCart
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductsCart $productsCart)
+    public function edit(Request $request, Order $order)
     {
-        //
+        $products = $order->getProducts();
+
+        return view('front/products_cart/edit', compact('products', 'order'));
     }
 
     /**

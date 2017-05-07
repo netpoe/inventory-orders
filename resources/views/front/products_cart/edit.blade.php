@@ -9,7 +9,7 @@
   <div class="container">
     @include('includes.products_cart.menu')
 
-    <form action="{{ route('front:orders:store', ['order' => $order->id]) }}" method="POST">
+    <form action="{{ route('cart:set-products-amount', ['order' => $order->id]) }}" method="POST">
       {{ csrf_field() }}
       <section class="products-cart-wrapper">
         <div class="products-cart-list">
@@ -17,12 +17,13 @@
             <div class="product-img"></div>
             <div class="product-name"></div>
             <div class="product-price"><span>Precio</span></div>
-            <div class="product-amount-value"><span>Cantidad</span></div>
+            <div class="product-amount"><span>Cantidad</span></div>
             <div class="amount-total"><span>Total</span></div>
-            <div class="product-removal"><span>Editar</span></div>
+            <div class="product-removal"><span>Quitar</span></div>
           </div>
           @foreach ($products as $product)
             <article class="product">
+              <input type="hidden" class="product-amount-value" name="product[id][{{ $product->id }}]" value="{{ $product->amountOnCart() }}">
               <div class="product-img">
                 <div><img src="/img/products/product.png" alt=""></div>
               </div>
@@ -33,53 +34,53 @@
               <div class="product-price">
                 <span class="price">{{ $product->price }}</span>
               </div>
-              <div class="product-amount-value">
-                <span>{{ $product->amountOnCart() }}</span>
+              <div class="product-amount">
+                <input type="number" oninput="return updateProductAmount(this)" class="form-control" value="{{ $product->amountOnCart() }}" min="1" max="{{ $product->stock }}">
               </div>
               <div class="amount-total">
-                <span>{{ $product->total() }}</span>
+                <span>{{ $product->price }}</span>
               </div>
-              <a href="{{ route('cart:edit', ['order' => $order->id]) }}" class="product-removal">
-                <i class="icon-pencil"></i>
-              </a>
+              <div class="product-removal">
+                <span>X</span>
+              </div>
             </article>
+            @if ($errors->has('product.id.'.$product->id))
+              <span class="help-block">{{ $errors->first('product.id.'.$product->id) }}</span>
+            @endif
           @endforeach
           <div class="summary">
-            <div class="shipping-payment-details">
-              <h5>Detalles del envío</h5>
-              <h5>Detalles del pago</h5>
-            </div>
+            <div>&nbsp;</div>
             <div class="totals">
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Subtotal:</strong>
+                  <strong>Subtotal: </strong>
                 </div>
                 <div class="amount">
-                  <strong>{{ $order->subtotal }}</strong>
+                  <strong>68.00</strong>
                 </div>
               </div>
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Descuento:</strong>
+                  <strong>Descuento: </strong>
                 </div>
                 <div class="amount">
-                  <strong>{{ $order->discount }}</strong>
+                  <strong>68.00</strong>
                 </div>
               </div>
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Impuestos:</strong>
+                  <strong>Impuestos: </strong>
                 </div>
                 <div class="amount">
-                  <strong>{{ $order->getTax() }}</strong>
+                  <strong>68.00</strong>
                 </div>
               </div>
               <div class="totals-row">
                 <div class="concept">
-                  <strong>Total:</strong>
+                  <strong>Total: </strong>
                 </div>
                 <div class="amount">
-                  <strong>{{ $order->total }}</strong>
+                  <strong>68.00</strong>
                 </div>
               </div>
             </div>
@@ -88,7 +89,7 @@
         <div class="actions">
           <fieldset class="form-group">
             <button type="submit" class="btn btn-info btn-block">
-              <span>Pagar</span>
+              <span>Siguiente ></span>
             </button>
           </fieldset>
         </div>
@@ -97,6 +98,14 @@
   </div>
 </div>
 @endsection
+
+<script>
+  function updateProductAmount(el) {
+    var product = el.closest('.product');
+    var productAmountValue = product.querySelector('.product-amount-value');
+    productAmountValue.value = el.value;
+  }
+</script>
 
 
 
