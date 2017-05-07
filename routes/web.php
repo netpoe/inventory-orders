@@ -21,12 +21,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/products', 'FrontController@index')->name('front:products:index');
 });
 
+Route::get('/cart/shipping/{order?}', 'ProductsCartController@shipping')->name('cart:shipping');
 Route::get('/cart/{order?}', 'ProductsCartController@index')->name('cart:index');
 Route::get('/cart/edit/{order}', 'ProductsCartController@edit')->name('cart:edit');
 Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
 Route::post('/cart/set-products-amount/{order?}', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
-Route::get('/cart/shipping/{order?}', 'ProductsCartController@shipping')->name('cart:shipping');
 Route::post('/cart/store-shipping-address', 'ProductsCartController@storeShippingAddress')->name('cart:store-shipping-address');
+Route::post('/cart/set-shipping-address', 'ProductsCartController@setShippingAddress')->name('cart:set-shipping-address');
 Route::post('/cart/login', 'ProductsCartController@login')->name('cart:login');
 
 Route::group(['middleware' => 'auth'], function(){

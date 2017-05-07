@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LuProductTaxSchemaSeeder::class);
         $this->call(LuProductStatus::class);
         $this->call(LuAddressCountriesSeeder::class);
+        $this->call(LuAddressStatesSeeder::class);
     }
 }

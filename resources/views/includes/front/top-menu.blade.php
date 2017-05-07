@@ -10,6 +10,7 @@
   <div class="top-menu-right">
     <nav>
       @if (Auth::check())
+        <a href="{{ route('front:products:index') }}">Dashboard</a>
         <a href="{{ route('logout') }}"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Salir

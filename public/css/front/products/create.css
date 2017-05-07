@@ -3447,7 +3447,7 @@ select.form-control-lg:not([size]):not([multiple]) {
   color: white;
 }
 
-.top-menu .top-menu-left {
+.top-menu .top-menu-left > nav {
   -ms-flex-direction: row;
   flex-direction: row;
   display: -ms-flexbox;
@@ -3463,7 +3463,7 @@ select.form-control-lg:not([size]):not([multiple]) {
   display: flex;
 }
 
-.top-menu .top-menu-right {
+.top-menu .top-menu-right > nav {
   -ms-flex-pack: end;
   justify-content: flex-end;
   -ms-flex-direction: row;

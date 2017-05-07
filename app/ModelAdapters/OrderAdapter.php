@@ -52,7 +52,6 @@ class OrderAdapter extends Order
 
         $orderProducts = ProductsCart::where('session', $session)->get();
 
-
         foreach ($orderProducts as $item) {
             $product = Product::find($item->product_id);
             $product->stock -= $item->product_amount;

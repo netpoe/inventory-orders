@@ -19,7 +19,9 @@ $top-menu-height-control: 56px;
     }
   }
   .top-menu-left {
-    @include flex-row;
+    > nav {
+      @include flex-row;
+    }
   }
   .top-menu-center {
     > nav {
@@ -27,8 +29,8 @@ $top-menu-height-control: 56px;
     }
   }
   .top-menu-right {
-    @include flex-row-end;
     > nav {
+      @include flex-row-end;
       a, div {
         border-right: 1px solid darken($brand-info, 7%);
         border-left: 1px solid darken($brand-info, 7%);
