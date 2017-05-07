@@ -26,6 +26,7 @@ Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:
 Route::post('/cart/set-products-amount', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('/front/orders', 'OrdersController@index')->name('front:orders:index');
     Route::get('/orders/confirmation', 'OrdersController@confirmation')->name('front:orders:confirmation');
     Route::post('/orders/store', 'OrdersController@store')->name('front:orders:store');
 });

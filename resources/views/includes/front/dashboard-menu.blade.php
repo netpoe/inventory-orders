@@ -2,7 +2,7 @@
 <header class="front-dashboard-menu">
   <a href="{{ route('front:products:index') }}"
     class="menu-item {{ preg_match('/front:products/', $currentRoute) ? 'active' : '' }}"><span>Productos</span></a>
-  <a href="#"
+  <a href="{{ route('front:orders:index') }}"
     class="menu-item {{ preg_match('/front:orders/', $currentRoute) ? 'active' : '' }}"><span>Órdenes</span></a>
   <a href="#"
     class="menu-item {{ preg_match('/front:invoices/', $currentRoute) ? 'active' : '' }}"><span>Facturas</span></a>

@@ -18,7 +18,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        return view('dashboard/orders/index');
+        return view('front/orders/index');
     }
 
     public function confirmation(Request $request)
@@ -56,6 +56,12 @@ class OrdersController extends Controller
         $session = $request->cookie('laravel_visitor_session');
 
         $order = new Order;
+
+        $orderExists = !$order->where('products_cart_session', $session)->get()->isEmpty();
+        if ($orderExists) {
+            return redirect()->route('front:orders:index');
+        }
+
         $order->user_id = Auth::id();
         $order->products_cart_session = $session;
         $order->status_id = LuOrderStatus::PENDING;
@@ -64,7 +70,7 @@ class OrdersController extends Controller
 
         $order->save();
 
-        return redirect()->route('front:products:index');
+        return redirect()->route('front:orders:index');
     }
 
     /**
