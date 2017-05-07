@@ -3436,6 +3436,10 @@ select.form-control-lg:not([size]):not([multiple]) {
   min-height: 56px;
 }
 
+.top-menu .logo {
+  color: white;
+}
+
 .header {
   background-color: #0275d8;
 }
@@ -8198,7 +8202,6 @@ a.text-danger:not(.btn):hover {
   flex-direction: row;
   display: -ms-flexbox;
   display: flex;
-  min-height: 98px;
   border: 1px solid #F7F7F9;
   position: relative;
   overflow: hidden;
@@ -8217,6 +8220,16 @@ a.text-danger:not(.btn):hover {
 
 .products-cart-list .product > div:not(.product-img) {
   padding: 1rem;
+}
+
+.products-cart-list .product.products-cart-list-header {
+  background-color: #F7F7F9;
+}
+
+.products-cart-list .product.products-cart-list-header > div {
+  padding: 0.25rem;
+  font-size: 0.875rem;
+  min-height: 0;
 }
 
 .products-cart-list .product-img {

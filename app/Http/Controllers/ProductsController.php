@@ -62,6 +62,7 @@ class ProductsController extends Controller
         $product = new Product;
 
         $product->name = $request->input('name');
+        $product->stock = $request->input('stock');
         $product->description = $request->input('description');
         $product->cost = $request->input('cost');
         $product->price = $request->input('price');

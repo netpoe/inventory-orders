@@ -13,9 +13,17 @@
       {{ csrf_field() }}
       <section class="products-cart-wrapper">
         <div class="products-cart-list">
+          <div class="product products-cart-list-header">
+            <div class="product-img"></div>
+            <div class="product-name"></div>
+            <div class="product-price"><span>Precio</span></div>
+            <div class="product-amount"><span>Cantidad</span></div>
+            <div class="amount-total"><span>Total</span></div>
+            <div class="product-removal"><span>Quitar</span></div>
+          </div>
           @foreach ($products as $product)
             <article class="product">
-              <input type="hidden" id="product-amount" name="product[id][{{ $product->id }}]" value="1">
+              <input type="hidden" class="product-amount-value" name="product[id][{{ $product->id }}]" value="{{ $product->amountOnCart() }}">
               <div class="product-img">
                 <div><img src="/img/products/product.png" alt=""></div>
               </div>
@@ -27,7 +35,7 @@
                 <span class="price">{{ $product->price }}</span>
               </div>
               <div class="product-amount">
-                <input type="number" oninput="return updateProductAmount(this)" class="form-control" value="1" min="1" max="{{ $product->stock }}">
+                <input type="number" oninput="return updateProductAmount(this)" class="form-control" value="{{ $product->amountOnCart() }}" min="1" max="{{ $product->stock }}">
               </div>
               <div class="amount-total">
                 <span>{{ $product->price }}</span>
@@ -93,8 +101,9 @@
 
 <script>
   function updateProductAmount(el) {
-    var productAmount = document.querySelector('#product-amount');
-    productAmount.value = el.value;
+    var product = el.closest('.product');
+    var productAmountValue = product.querySelector('.product-amount-value');
+    productAmountValue.value = el.value;
   }
 </script>
 

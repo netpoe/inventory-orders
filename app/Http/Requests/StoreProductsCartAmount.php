@@ -49,7 +49,11 @@ class StoreProductsCartAmount extends FormRequest
 
             $stock = $productModel->where('id', $id)->first(['stock'])->stock;
 
-            return $amount > $stock;
+            if ($amount == $stock) {
+                return false;
+            }
+
+            return  $amount > $stock;
         }
     }
 }

@@ -87,7 +87,7 @@ class ProductsCartController extends Controller
         $cart = new ProductsCart;
         $cart->setProductsAmount($cookie, $request->input('product.id'));
 
-        return redirect()->route('cart:index');
+        return redirect()->route('front:orders:confirmation');
     }
 
     /**

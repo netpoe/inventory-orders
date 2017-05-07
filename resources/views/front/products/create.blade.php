@@ -34,7 +34,7 @@
                   <fieldset class="form-group {{ $errors->has('stock') ? 'has-error' : '' }}">
                     <label for="stock">Stock</label>
                     <input name="stock" type="number" value="{{ old('stock') }}" class="form-control form-control-lg" required>
-                    @if ($errors->has('name'))
+                    @if ($errors->has('stock'))
                       <span class="help-block">{{ $errors->first('stock') }}</span>
                     @endif
                   </fieldset>

@@ -12,7 +12,6 @@ $totals-amount-width-control: 35%;
   .product {
     @include flex-basis($product-item-width-control);
     @include flex-row;
-    min-height: $product-item-height-control;
     border: 1px solid $gray-lightest;
     position: relative;
     overflow: hidden;
@@ -22,6 +21,14 @@ $totals-amount-width-control: 35%;
       min-height: $product-item-height-control;
       &:not(.product-img) {
         padding: get-spacer(3, x);
+      }
+    }
+    &.products-cart-list-header {
+      background-color: $gray-lightest;
+      > div {
+        padding: get-spacer(1, x);
+        font-size: $font-size-sm;
+        min-height: 0;
       }
     }
   }

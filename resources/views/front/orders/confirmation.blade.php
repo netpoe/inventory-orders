@@ -13,6 +13,14 @@
       {{ csrf_field() }}
       <section class="products-cart-wrapper">
         <div class="products-cart-list">
+          <div class="product products-cart-list-header">
+            <div class="product-img"></div>
+            <div class="product-name"></div>
+            <div class="product-price"><span>Precio</span></div>
+            <div class="product-amount-value"><span>Cantidad</span></div>
+            <div class="amount-total"><span>Total</span></div>
+            <div class="product-removal"><span>Editar</span></div>
+          </div>
           @foreach ($products as $product)
             <article class="product">
               <div class="product-img">
@@ -32,7 +40,7 @@
                 <span>{{ $product->price }}</span>
               </div>
               <div class="product-removal">
-                <span><i class="icon-pencil"></i></span>
+                <a href="{{ route('cart:index') }}"><i class="icon-pencil"></i></a>
               </div>
             </article>
           @endforeach

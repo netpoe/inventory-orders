@@ -3436,6 +3436,10 @@ select.form-control-lg:not([size]):not([multiple]) {
   min-height: 56px;
 }
 
+.top-menu .logo {
+  color: white;
+}
+
 .header {
   background-color: #0275d8;
 }
