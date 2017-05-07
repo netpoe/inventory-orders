@@ -70,6 +70,8 @@ class OrdersController extends Controller
 
         $order->save();
 
+        $order->updateProductsStock();
+
         return redirect()->route('front:orders:index');
     }
 

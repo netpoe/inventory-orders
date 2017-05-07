@@ -4,6 +4,7 @@ namespace App\ModelAdapters;
 
 use App\Order;
 use App\ModelAdapters\ProductsCartAdapter as ProductsCart;
+use App\ModelAdapters\ProductAdapter as Product;
 
 class OrderAdapter extends Order
 {
@@ -36,5 +37,21 @@ class OrderAdapter extends Order
         }
 
         return 0.0;
+    }
+
+    public function updateProductsStock()
+    {
+        $session = $this->products_cart_session;
+
+        $orderProducts = ProductsCart::where('session', $session)->get();
+
+
+        foreach ($orderProducts as $item) {
+            $product = Product::find($item->product_id);
+            $product->stock -= $item->product_amount;
+            $product->save();
+        }
+
+        return $this;
     }
 }

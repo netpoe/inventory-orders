@@ -20,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::orderBy('name')->get();
+        $products = Product::where('stock', '>', 0)->orderBy('name')->get();
 
         $response = response()->view('home', compact('products'));
 
