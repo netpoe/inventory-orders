@@ -8236,6 +8236,44 @@ a.text-danger:not(.btn):hover {
   min-height: 56px;
 }
 
+.front-dashboard-menu {
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.front-dashboard-menu .menu-item {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  border-right: 1px solid #F7F7F9;
+  background-color: white;
+  min-height: 56px;
+  text-align: center;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.front-dashboard-menu .menu-item:last-child {
+  border-right: none;
+}
+
+.front-dashboard-menu .menu-item:hover, .front-dashboard-menu .menu-item.active {
+  background-color: #0262b5;
+  border-right: 1px solid #0275d8;
+  color: white;
+}
+
+.front-dashboard-menu .menu-item:hover:last-child, .front-dashboard-menu .menu-item.active:last-child {
+  border-right: none;
+}
+
 .products-cart-list .product {
   flex-basis: 100%;
   -ms-flex-preferred-size: 100%;
@@ -8263,14 +8301,26 @@ a.text-danger:not(.btn):hover {
   padding: 1rem;
 }
 
-.products-cart-list .product.products-cart-list-header {
-  background-color: #F7F7F9;
+.products-cart-list .product.products-cart-list-header, .products-cart-list .product.products-cart-list-header-light {
+  border: none;
 }
 
-.products-cart-list .product.products-cart-list-header > div {
+.products-cart-list .product.products-cart-list-header > div, .products-cart-list .product.products-cart-list-header-light > div {
   padding: 0.25rem;
   font-size: 0.875rem;
   min-height: 0;
+}
+
+.products-cart-list .product.products-cart-list-header {
+  background-color: #0262b5;
+}
+
+.products-cart-list .product.products-cart-list-header > div {
+  color: white;
+}
+
+.products-cart-list .product.products-cart-list-header-light {
+  background-color: #F7F7F9;
 }
 
 .products-cart-list .product-img {
@@ -8404,43 +8454,4 @@ a.text-danger:not(.btn):hover {
 
 .products-cart-wrapper .actions > .form-group button {
   min-height: 56px;
-}
-
-.front-dashboard-menu {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  display: -ms-flexbox;
-  display: flex;
-  border-bottom: 1px solid #F7F7F9;
-}
-
-.front-dashboard-menu .menu-item {
-  -ms-flex-pack: center;
-  justify-content: center;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  display: -ms-flexbox;
-  display: flex;
-  border-right: 1px solid #F7F7F9;
-  background-color: white;
-  min-height: 56px;
-  text-align: center;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.front-dashboard-menu .menu-item:last-child {
-  border-right: none;
-}
-
-.front-dashboard-menu .menu-item:hover, .front-dashboard-menu .menu-item.active {
-  background-color: #0262b5;
-  border-right: 1px solid #0275d8;
-  color: white;
-}
-
-.front-dashboard-menu .menu-item:hover:last-child, .front-dashboard-menu .menu-item.active:last-child {
-  border-right: none;
 }

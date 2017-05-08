@@ -8355,7 +8355,6 @@ a.text-danger:not(.btn):hover {
   flex-direction: row;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #F7F7F9;
 }
 
 .front-dashboard-menu .menu-item {
@@ -8394,14 +8393,16 @@ a.text-danger:not(.btn):hover {
   flex-direction: row;
   display: -ms-flexbox;
   display: flex;
+  background-color: #0262b5;
 }
 
 .front-dashboard-sub-menu a {
   padding: 0.25rem 1rem;
   font-size: 0.875rem;
   display: inline-block;
+  color: white;
 }
 
-.front-dashboard-sub-menu a:hover {
-  background-color: #ECEEEF;
+.front-dashboard-sub-menu a:hover, .front-dashboard-sub-menu a.active {
+  background-color: #0275d8;
 }

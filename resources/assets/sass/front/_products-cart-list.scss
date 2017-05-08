@@ -23,13 +23,23 @@ $totals-amount-width-control: 35%;
         padding: get-spacer(3, x);
       }
     }
-    &.products-cart-list-header {
-      background-color: $gray-lightest;
+    &.products-cart-list-header,
+    &.products-cart-list-header-light {
+      border: none;
       > div {
         padding: get-spacer(1, x);
         font-size: $font-size-sm;
         min-height: 0;
       }
+    }
+    &.products-cart-list-header {
+      background-color: darken($front-dashboard-menu-color, 7%);
+      > div {
+        color: white;
+      }
+    }
+    &.products-cart-list-header-light {
+      background-color: $gray-lightest;
     }
   }
   .product-img {

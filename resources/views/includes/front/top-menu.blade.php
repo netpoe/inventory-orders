@@ -4,7 +4,7 @@
   </div>
   <div class="top-menu-center">
     <nav>
-      <a href="{{ route('products:index') }}" class="logo">home</a>
+      <a href="{{ route('products:index') }}" class="logo">ECOMMERCE UI</a>
     </nav>
   </div>
   <div class="top-menu-right">

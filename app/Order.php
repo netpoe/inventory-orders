@@ -17,4 +17,9 @@ class Order extends Model
     {
         return $this->hasOne('\App\ModelAdapters\UserAddressAdapter', 'id', 'address_id');
     }
+
+    public function status()
+    {
+        return $this->hasOne('\App\ModelAdapters\LuOrderStatusAdapter', 'id', 'status_id');
+    }
 }

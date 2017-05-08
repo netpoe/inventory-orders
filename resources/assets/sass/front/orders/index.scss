@@ -1,5 +1,10 @@
 @import "./resources/assets/sass/products.scss";
 @import "./resources/assets/sass/front/front";
 @import "./resources/assets/sass/front/dashboard-menu";
+@import "./resources/assets/sass/front/dashboard-sub-menu";
 @import "./resources/assets/sass/front/products-cart-list";
-@import "./resources/assets/sass/front/products-cart-wrapper";
+@import "./node_modules/ebm/elements/ebm-accordion";
+
+.orders-index-wrapper {
+  background-color: white;
+}

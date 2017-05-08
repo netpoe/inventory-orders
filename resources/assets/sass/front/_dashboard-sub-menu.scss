@@ -1,11 +1,14 @@
 .front-dashboard-sub-menu {
   @include flex-row-center;
+  background-color: darken($front-dashboard-menu-color, 7%);
   a {
     padding: get-spacer(1, y) get-spacer(3, x);
     font-size: $font-size-sm;
     display: inline-block;
-    &:hover {
-      background-color: $gray-lighter;
+    color: white;
+    &:hover,
+    &.active {
+      background-color: $front-dashboard-menu-color;
     }
   }
 }
