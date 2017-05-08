@@ -9,8 +9,9 @@
   </div>
   <div class="top-menu-right">
     <nav>
+        <a href="{{ route('cart:index') }}">Carrito</a>
       @if (Auth::check())
-        <a href="{{ route('front:products:index') }}">Dashboard</a>
+        <a href="{{ route('front:products:index') }}">Mi cuenta</a>
         <a href="{{ route('logout') }}"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Salir

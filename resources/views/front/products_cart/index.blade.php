@@ -9,7 +9,7 @@
   <div class="container">
     @include('includes.products_cart.menu')
 
-    <form action="{{ route('cart:set-products-amount') }}" method="POST">
+    <form action="{{ route('front:orders:store') }}" method="POST">
       {{ csrf_field() }}
       <section class="products-cart-wrapper">
         <div class="products-cart-list">
@@ -21,31 +21,31 @@
             <div class="amount-total"><span>Total</span></div>
             <div class="product-removal"><span>Quitar</span></div>
           </div>
-          @foreach ($products as $product)
+          @foreach ($cart as $item)
             <article class="product">
-              <input type="hidden" class="product-amount-value" name="product[id][{{ $product->id }}]" value="{{ $product->amountOnCart() }}">
+              <input type="hidden" class="product-amount-value" name="product[id][{{ $item->product->id }}]" value="{{ $item->amount }}">
               <div class="product-img">
                 <div><img src="/img/products/product.png" alt=""></div>
               </div>
               <div class="product-name">
                 <span class="category">Categoría</span>
-                <span class="name">{{ $product->name }}</span>
+                <span class="name">{{ $item->product->name }}</span>
               </div>
               <div class="product-price">
-                <span class="price">{{ $product->price }}</span>
+                <span class="price">{{ $item->product->price }}</span>
               </div>
               <div class="product-amount">
-                <input type="number" oninput="return updateProductAmount(this)" class="form-control" value="{{ $product->amountOnCart() }}" min="1" max="{{ $product->stock }}">
+                <input type="number" oninput="return updateProductAmount(this)" class="form-control" value="{{ $item->amount }}" min="1" max="{{ $item->product->stock }}">
               </div>
               <div class="amount-total">
-                <span>{{ $product->price }}</span>
+                <span>{{ $item->product->price }}</span>
               </div>
               <div class="product-removal">
                 <span>X</span>
               </div>
             </article>
-            @if ($errors->has('product.id.'.$product->id))
-              <span class="help-block">{{ $errors->first('product.id.'.$product->id) }}</span>
+            @if ($errors->has('product.id.'.$item->product->id))
+              <span class="help-block">{{ $errors->first('product.id.'.$item->product->id) }}</span>
             @endif
           @endforeach
           <div class="summary">

@@ -8,6 +8,7 @@ use App\ModelAdapters\ProductAdapter as Product;
 use App\ModelAdapters\OrderAdapter as Order;
 use App\ModelAdapters\LuOrderStatusAdapter as LuOrderStatus;
 use Auth;
+use App\Http\Requests\StoreProductsCartAmount;
 
 class OrdersController extends Controller
 {
@@ -27,11 +28,11 @@ class OrdersController extends Controller
     public function confirmation(Request $request, Order $order)
     {
         if ($order->status_id == LuOrderStatus::PENDING) {
-            $products = $order->getProducts();
+            $cart = $order->getCart();
             $address = $order->address;
             $order->calcTotals();
 
-            $params = compact('products', 'order', 'address');
+            $params = compact('cart', 'order', 'address');
 
             return view('front/orders/confirmation', $params);
         }
@@ -49,21 +50,36 @@ class OrdersController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
+    /*
+     * store
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, Order $order)
+     * Method will update the products_cart.amount field according to the user selection
+     * Restrictions include if the input amount is greater than product.stock value, the update should not do
+     *
+     * @param Request
+     *
+     * @return redirect to cart:shipping
+     * */
+    public function store(StoreProductsCartAmount $request)
     {
-        $order->calcTotals()->save();
+        $session = $request->cookie('laravel_visitor_session');
+        // TODO if cookie does not exist, create it and redirect
 
-        // TODO perform payment and update stock
-        // If payment fails, the stock should not be updated and should display payment failure notice
-        $order->updateProductsStock();
+        $cart = new ProductsCart;
+        $cart->setProductsAmount($session, $request->input('product.id'));
 
-        return redirect()->route('front:orders:index');
+        $order = Order::where('products_cart_session', $session)->first();
+        if ($order) {
+            return redirect()->route('shipping:index', ['order' => $order->id]);
+        }
+
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'products_cart_session' => $session,
+            'status_id' => LuOrderStatus::PENDING,
+        ]);
+
+        return redirect()->route('shipping:index', ['order' => $order->id]);
     }
 
     /**
@@ -97,7 +113,13 @@ class OrdersController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->calcTotals()->save();
+
+        // TODO perform payment and update stock
+        // If payment fails, the stock should not be updated and should display payment failure notice
+        $order->updateProductsStock();
+
+        return redirect()->route('front:orders:index');
     }
 
     /**

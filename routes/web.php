@@ -21,20 +21,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/products', 'FrontController@index')->name('front:products:index');
 });
 
-Route::get('/cart/shipping/{order?}', 'ProductsCartController@shipping')->name('cart:shipping');
 Route::get('/cart/{order?}', 'ProductsCartController@index')->name('cart:index');
 Route::get('/cart/edit/{order}', 'ProductsCartController@edit')->name('cart:edit');
 Route::get('/cart/store/{product}', 'ProductsCartController@store')->name('cart:store');
-Route::post('/cart/set-products-amount/{order?}', 'ProductsCartController@setProductsAmount')->name('cart:set-products-amount');
-Route::post('/cart/store-shipping-address', 'ProductsCartController@storeShippingAddress')->name('cart:store-shipping-address');
-Route::post('/cart/set-shipping-address', 'ProductsCartController@setShippingAddress')->name('cart:set-shipping-address');
-Route::post('/cart/login', 'ProductsCartController@login')->name('cart:login');
+Route::post('/cart/update/{order}', 'ProductsCartController@update')->name('cart:update');
 
+Route::post('/orders/store', 'OrdersController@store')->name('front:orders:store');
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/orders', 'OrdersController@index')->name('front:orders:index');
     Route::get('/orders/confirmation/{order?}', 'OrdersController@confirmation')->name('front:orders:confirmation');
-    Route::post('/orders/store/{order}', 'OrdersController@store')->name('front:orders:store');
+    Route::post('/orders/update/{order}', 'OrdersController@update')->name('front:orders:update');
 });
+
+Route::get('/shipping/{order}', 'ShippingController@index')->name('shipping:index');
+Route::get('/shipping/edit/{order}', 'ShippingController@edit')->name('shipping:edit');
+Route::post('/shipping/store/{order}', 'ShippingController@store')->name('shipping:store');
+Route::post('/shipping/update/{order}', 'ShippingController@update')->name('shipping:update');
+Route::post('/shipping/login/{order}', 'ShippingController@login')->name('shipping:login');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/front/brands', 'BrandsController@index')->name('front:brands:index');

@@ -13,7 +13,7 @@
       <div class="p-3">
         @if (Auth::check())
           @if (count($addresses) > 0)
-            <form method="POST" action="{{ route('cart:set-shipping-address') }}">
+            <form method="POST" action="{{ route('shipping:update', ['order' => $orderId]) }}">
               {{ csrf_field() }}
               <section class="products-cart-wrapper">
                 <fieldset class="grid-list-item form-group {{ $errors->has('address_id') ? 'has-error' : '' }}">
@@ -37,7 +37,7 @@
             <div class="text-center mv-2"><strong>ó</strong></div>
           @endif
           <h5>Escribe la dirección de envío a donde quieres recibir tu producto</h5>
-          <form method="POST" action="{{ route('cart:store-shipping-address') }}">
+          <form method="POST" action="{{ route('shipping:store', ['order' => $orderId]) }}">
             {{ csrf_field() }}
             <fieldset class="form-group {{ $errors->has('zip_code') ? 'has-error' : '' }}">
               <label for="zip_code">Código postal</label>
@@ -104,7 +104,7 @@
           </form>
         @else
           <h5>Ingresa para usar una de tus direcciones o poner una nueva</h5>
-          <form method="POST" action="{{ route('cart:login') }}">
+          <form method="POST" action="{{ route('shipping:login', ['order' => $orderId]) }}">
             {{ csrf_field() }}
             <div class="row">
               <fieldset class="col-sm-4 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
@@ -129,7 +129,7 @@
           </form>
           <div class="text-center mv-2"><strong>ó</strong></div>
           <h5>Escribe la dirección de envío, nosotros crearemos una cuenta por ti</h5>
-          <form method="POST" action="{{ route('cart:store-shipping-address') }}">
+          <form method="POST" action="{{ route('shipping:store', ['order' => $orderId]) }}">
             {{ csrf_field() }}
             <fieldset class="form-group {{ $errors->has('zip_code') ? 'has-error' : '' }}">
               <label for="zip_code">Código postal</label>

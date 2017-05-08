@@ -8,6 +8,12 @@ class Order extends Model
 {
     protected $table = 'orders';
 
+    protected $fillable = [
+        'user_id',
+        'products_cart_session',
+        'status_id',
+    ];
+
     public function tax()
     {
         return $this->hasOne('\App\ModelAdapters\LuProductTaxSchemaAdapter', 'id', 'tax_id');

@@ -10,14 +10,14 @@ class OrderAdapter extends Order
 {
     public function calcTotals()
     {
-        $products = $this->getProducts();
+        $cart = $this->getCart();
 
         $this->subtotal = 0.0;
         $this->discount = 0.0;
         $this->total = 0.0;
 
-        foreach ($products as $product) {
-            $subtotal = ($product->price * $product->amountOnCart()) / (1 + $product->discount);
+        foreach ($cart as $item) {
+            $subtotal = ($item->product->price * $item->amount) / (1 + $item->product->discount);
             $this->subtotal += round($subtotal, 2);
             $total = $this->subtotal / (1 + 0.0);
             $this->total += round($total, 2);
@@ -26,14 +26,13 @@ class OrderAdapter extends Order
         return $this;
     }
 
-    public function getProducts()
+    public function getCart()
     {
         $session = $this->products_cart_session;
 
-        $cart = new ProductsCart;
-        $products = $cart->getProductsInSession($session);
+        $cart = ProductsCart::where('session', $session)->get();
 
-        return $products;
+        return $cart;
     }
 
     public function getTax()
@@ -54,7 +53,7 @@ class OrderAdapter extends Order
 
         foreach ($orderProducts as $item) {
             $product = Product::find($item->product_id);
-            $product->stock -= $item->product_amount;
+            $product->stock -= $item->amount;
             $product->save();
         }
 

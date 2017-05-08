@@ -17,14 +17,9 @@ class ProductAdapter extends Product
         return $sku;
     }
 
-    public function amountOnCart()
+    public function total(Int $amount)
     {
-        return $this->cart->product_amount;
-    }
-
-    public function total()
-    {
-        $total = ($this->price * $this->amountOnCart()) / (1 + $this->discount);
+        $total = ($this->price * $amount) / (1 + $this->discount);
         return round($total, 2);
     }
 }

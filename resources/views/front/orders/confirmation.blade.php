@@ -9,7 +9,7 @@
   <div class="container">
     @include('includes.products_cart.menu')
 
-    <form action="{{ route('front:orders:store', ['order' => $order->id]) }}" method="POST">
+    <form action="{{ route('front:orders:update', ['order' => $order->id]) }}" method="POST">
       {{ csrf_field() }}
       <section class="products-cart-wrapper">
         <div class="products-cart-list">
@@ -21,23 +21,23 @@
             <div class="amount-total"><span>Total</span></div>
             <div class="product-removal"><span>Editar</span></div>
           </div>
-          @foreach ($products as $product)
+          @foreach ($cart as $item)
             <article class="product">
               <div class="product-img">
                 <div><img src="/img/products/product.png" alt=""></div>
               </div>
               <div class="product-name">
                 <span class="category">Categoría</span>
-                <span class="name">{{ $product->name }}</span>
+                <span class="name">{{ $item->product->name }}</span>
               </div>
               <div class="product-price">
-                <span class="price">{{ $product->price }}</span>
+                <span class="price">{{ $item->product->price }}</span>
               </div>
               <div class="product-amount-value">
-                <span>{{ $product->amountOnCart() }}</span>
+                <span>{{ $item->amount }}</span>
               </div>
               <div class="amount-total">
-                <span>{{ $product->total() }}</span>
+                <span>{{ $item->product->total($item->amount) }}</span>
               </div>
               <a href="{{ route('cart:edit', ['order' => $order->id]) }}" class="product-removal">
                 <i class="icon-pencil"></i>
@@ -47,7 +47,9 @@
           <div class="summary">
             <div class="shipping-payment-details">
               <h5>Detalles del envío</h5>
-              <p>{{ $address->getAddressString() }} <a href="{{ route('cart:shipping', ['order' => $order->id]) }}"><i class="icon-pencil"></i></a></p>
+              @if ($address)
+                <p>{{ $address->getAddressString() }} <a href="{{ route('shipping:edit', ['order' => $order->id]) }}"><i class="icon-pencil"></i></a></p>
+              @endif
               <h5>Detalles del pago</h5>
             </div>
             <div class="totals">

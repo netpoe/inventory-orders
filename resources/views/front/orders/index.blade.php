@@ -36,23 +36,23 @@
                   <div class="product-amount-value"><span>Cantidad</span></div>
                   <div class="amount-total"><span>Total</span></div>
                 </div>
-                @foreach ($order->getProducts() as $product)
+                @foreach ($order->getCart() as $cart)
                   <article class="product">
                     <div class="product-img">
                       <div><img src="/img/products/product.png" alt=""></div>
                     </div>
                     <div class="product-name">
                       <span class="category">Categoría</span>
-                      <span class="name">{{ $product->name }}</span>
+                      <span class="name">{{ $cart->product->name }}</span>
                     </div>
                     <div class="product-price">
-                      <span class="price">{{ $product->price }}</span>
+                      <span class="price">{{ $cart->product->price }}</span>
                     </div>
                     <div class="product-amount-value">
-                      <span>{{ $product->amountOnCart() }}</span>
+                      <span>{{ $cart->amount }}</span>
                     </div>
                     <div class="amount-total">
-                      <span>{{ $product->total() }}</span>
+                      <span>{{ $cart->product->total($cart->amount) }}</span>
                     </div>
                   </article>
                 @endforeach

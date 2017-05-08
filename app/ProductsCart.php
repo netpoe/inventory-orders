@@ -12,4 +12,9 @@ class ProductsCart extends Model
     {
         return $this->hasOne('\App\ModelAdapters\ProductAdapter', 'id', 'product_id');
     }
+
+    public function getAmountAttribute($value)
+    {
+        return $value == 0 ? 1 : $value;
+    }
 }

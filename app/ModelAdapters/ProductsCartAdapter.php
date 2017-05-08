@@ -13,7 +13,7 @@ class ProductsCartAdapter extends ProductsCart
 
             $this->where('session', $cookie)
                 ->where('product_id', $id)
-                ->update(['product_amount' => $amount]);
+                ->update(['amount' => $amount]);
         }
 
         return $this;
