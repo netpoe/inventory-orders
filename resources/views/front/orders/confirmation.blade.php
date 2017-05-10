@@ -1,13 +1,13 @@
 @extends('layouts.front')
 
 @section('head-link')
-<link href="/css/front/products_cart/index.css" rel="stylesheet">
+<link href="/css/front/cart/index.css" rel="stylesheet">
 @endsection
 
 @section('content')
 <div class="container-overlap">
   <div class="container">
-    @include('includes.products_cart.menu')
+    @include('includes.front.cart-menu')
 
     <form action="{{ route('front:orders:update', ['order' => $order->id]) }}" method="POST">
       {{ csrf_field() }}

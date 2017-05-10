@@ -30,7 +30,7 @@ class ProductsCartController extends Controller
 
         $cart = ProductsCart::where('session', $session)->get();
 
-        return view('front/products_cart/index', compact('cart', $session));
+        return view('front/cart/index', compact('cart', $session));
     }
 
     /**
@@ -98,7 +98,7 @@ class ProductsCartController extends Controller
 
         $cart = ProductsCart::where('session', $session)->get();
 
-        return view('front/products_cart/edit', compact('cart', 'order'));
+        return view('front/cart/edit', compact('cart', 'order'));
     }
 
     /**
